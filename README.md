@@ -16,3 +16,5 @@ Base code is still under work, being several features not yet covered (but expec
  - Some features from JSON Schema types, e.g. the 'contains' directive from the 'object' type
  - Reconstruction of form data into JSON (either client- or server-side)
  - Beautifying Layout and general bugfixing.
+
+This script was initially conceived to be used in the framework of [the Cookbase Project](https://github.com/hblanko/cookbase).
