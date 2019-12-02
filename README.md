@@ -13,8 +13,8 @@ document.body.appendChild(
 
 Base code is still under work, being several features not yet covered (but expected to be):
  - The 'anyOf' keyword
- - Some features from JSON Schema types, e.g. the 'contains' directive from the 'object' type
+ - A number of features from JSON Schema types, e.g. the 'contains' directive from the 'object' type
  - Reconstruction of form data into JSON (either client- or server-side)
- - Beautifying Layout and general bugfixing.
+ - Beautifying layout and general bugfixing
 
 This script was initially conceived to be used in the framework of [the Cookbase Project](https://github.com/hblanko/cookbase).
