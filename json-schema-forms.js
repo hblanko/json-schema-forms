@@ -1,475 +1,1329 @@
 function generate(schema, title) {
+  const cssLink = document.head.appendChild(
+      document.createElement("link")
+  );
+
+  cssLink.rel = "stylesheet";
+  cssLink.type = "text/css";
+  cssLink.href = "json-schema-forms.css";
   const form = document.createElement("form");
-  form.id = title;
-  form.onsubmit = sendForm;
-  form.appendChild(create(schema, {}, title, null, false));
-  const submitInput = document.createElement("input");
-  submitInput.type = "submit";
-  submitInput.value = "Submit";
-  form.appendChild(submitInput);
-  initialize(form);
+  form.classList.add("form-inline");
+  form.appendChild(create(schema, title, {activated: true, required: true, enabled: true}));
+  const submitButton = createButton("button", "Submit form", sendForm, "submitter");
+  submitButton.classList.add("btn", "btn-primary");
+  form.appendChild(submitButton);
   return form;
 }
 
-function initialize(form) {
-  // TODO: Initialize with minItems and minProperties
-  // TODO: Remove unnecessary buttons (and include the logic into button callbacks)
-  enable(form.firstChild, false);
-}
-
-function enableOneOf(oneOfObject, enforce) {
-//  debugger;
-  if(oneOfObject.querySelector(":scope > .disableable")) {
-    oneOfObject.querySelector(":scope > .disableable").disabled = false;
-    oneOfObject.querySelector(":scope > .disableable").dataset.state = "enabled";
-  }
-
-  oneOfObject.lastChild.childNodes.forEach((e, i) => {
-//    debugger;
-    if(i === 0) {
-      e.parentNode.previousElementSibling.childNodes[i].dataset.state = "enabled";
-      e.parentNode.previousElementSibling.childNodes[i].disabled = true;
-      enable(e, enforce);
-    } else {
-      e.parentNode.previousElementSibling.childNodes[i].dataset.state = "disabled";
-      e.parentNode.previousElementSibling.childNodes[i].disabled = false;
-      e.querySelectorAll(".disableable").forEach(o => {
-        o.disabled = true;
-      });
-    }
-  });
-}
-
-function enable(object, enforce = true) {
-  // if one-of -> disable all but Option 0
-  if(!object.classList.contains("required") && !enforce) {
-    disable(object);
-  } else {
-    if(object.classList.contains("array")) {
-      if(object.querySelector(":scope > .disableable")) {
-        object.querySelector(":scope > .disableable").disabled = false;
-        object.querySelector(":scope > .disableable").dataset.state = "enabled";
-      }
-
-      object.querySelector(":scope > .add-button").disabled = false;
-      object.childNodes.forEach(e => {
-        if(e.classList.contains("array-item"))
-          enable(e);
-      });
-    } else if(object.classList.contains("object")) {
-      if(object.querySelector(":scope > .disableable")) {
-        object.querySelector(":scope > .disableable").disabled = false;
-        object.querySelector(":scope > .disableable").dataset.state = "enabled";
-      }
-
-      object.childNodes.forEach(e => {
-        if(e.classList.contains("array") ||
-           e.classList.contains("const") ||
-           e.classList.contains("integer") ||
-           e.classList.contains("object") ||
-           e.classList.contains("one-of") ||
-           e.classList.contains("string"))
-          enable(e, false);
-        else if(e.classList.contains("additional-properties")) {
-          e.childNodes.forEach(o => {
-            if(o.classList.contains("disableable"))
-              o.disabled = false;
-            else if(o.classList.contains("additional-property"))
-              o.childNodes.forEach(u => {
-                if(u.classList.contains("disableable"))
-                  u.disabled = false;
-                else
-                  enable(u);
-              })
-          });
-        }
-      });
-    } else if(object.classList.contains("one-of"))
-      enableOneOf(object, enforce);
-    else if(object.classList.contains("integer") ||
-            object.classList.contains("string"))
-      object.querySelectorAll(":scope > .disableable").forEach(e => {
-        e.disabled = false;
-      });
-    else if(object.classList.contains("const"))
-      object.lastChild.disabled = true;
-  }
-}
-
-function disable(object) {
-  object.querySelectorAll(".disableable").forEach(e => {
-    if(e.classList.contains("toggler") && e.parentNode === object) {
-      e.disabled = false;
-      e.dataset.state = "disabled";
-    } else {
-      e.disabled = true;
-      if(e.classList.contains("toggler") || e.classList.contains("one-of-toggler"))
-        e.dataset.state = "disabled";
-    }
-  });
-}
-
-function create(object, checking, id, datalistId = null, required = true, aioop = false) {
+function create(instance, id, state, arrayDatalist = null) {
   let element;
-  let datalistElement = null;
 
-  if(object.const) {
-    element = createTextInputWithLabel(id, "const", "const", null, null, required);
-    element.lastChild.value = object.const;
-    element.lastChild.disabled = true;
-    return element;
+  if(!instance) {
+    console.warn("Undefined instance, setting default 'type' to 'string'");
+    instance = {type: "string"};
   }
 
-  if(object.allOf)
-    // TODO: Make sure full deep merging is performed
-    object = merge.apply(this, object.allOf);
-  else if (object.oneOf) {
-    element = initElement(id, "one-of", required);
-    
-    oneOfButtonsDiv = document.createElement("div");
-    oneOfOptionsDiv = document.createElement("div");
-    element.appendChild(oneOfButtonsDiv);
-    element.appendChild(oneOfOptionsDiv);
-    object.oneOf.forEach((option, i) => {
-      oneOfButtonsDiv.appendChild(createOneOfButton(i));
-      oneOfOptionsDiv.appendChild(
-        create(option, checking, id + "__one-of__" + i, datalistId, true)
-      );
-    });
-    return element;
-  }
-
-  switch(object.type) {
+  switch(instance.type) {
     case "array":
-      if(object.items && object.items.enum) {
-        datalistId = id + "__datalist";
-        datalistElement = createDatalist(datalistId, object.items.enum);
-      }
+      element = (new JSCHArray(id, instance, state, arrayDatalist)).instanceDiv;
+      break;
 
-      element = createArray(object, checking, id, datalistId, required, aioop);
+    case "boolean":
+      element = (new JSCHBoolean(id, state)).instanceDiv;
       break;
 
     case "integer":
-      if(object.enum && !datalistId) {
-        datalistId = id + "__datalist";
-        datalistElement = createDatalist(datalistId, object.enum);
-      }
+      element = (new JSCHInteger(id, instance, state, arrayDatalist)).instanceDiv;
+      break;
 
-      element = createInteger(object, checking, id, "text", datalistId, required, aioop);
+    case "number":
+      element = (new JSCHNumber(id, instance, state, arrayDatalist)).instanceDiv;
       break;
 
     case "object":
-      element = createObject(object, checking, id, required, aioop);
+      element = (new JSCHObject(id, instance, state, arrayDatalist)).instanceDiv;
       break;
 
     case "string":
-      if(object.enum && !datalistId) {
-        datalistId = id + "__datalist";
-        datalistElement = createDatalist(datalistId, object.enum);
-      }
-
-      element = createString(object, checking, id, "text", datalistId, htmlizeRegex(object.pattern), required, aioop);
+      element = (new JSCHString(id, instance, state, arrayDatalist)).instanceDiv;
       break;
-  };
 
-  if (datalistElement)
-    element.appendChild(datalistElement);
+    case "null":
+      element = (new JSCHConst(id, instance, state)).instanceDiv;
+      break;
 
-  return element;
-}
-
-function initElement(id, type, required, ArrayItemOrObjectProperty = false) {
-  const element = document.createElement("div");
-  element.id = id;
-  element.classList.add(type);
-
-  if(!ArrayItemOrObjectProperty) {
-    if(!required)
-      element.appendChild(createToggleButton());
-    else
-      element.classList.add("required");
-
-    element.appendChild(document.createElement("h3")).innerHTML = beautifyId(id);
-  }
-
-  return element;
-}
-
-function createObject(object, checking, id, required, aioop) {
-  function removeAPCallback() {
-    if (object.minProperties && object.minProperties < this.parentNode.parentNode.querySelectorAll(":scope > .additional-property").length)
-      this.parentNode.remove();
-  }
-
-  const objectDiv = initElement(id, "object", required);
-
-  if(object.required)
-    object.required.forEach(propertyKey => {
-      objectDiv.appendChild(
-        create(object.properties[propertyKey], checking, id + "__" + propertyKey, null, true)
-      );
-//      objectDiv.lastChild.classList.add("required");
-    });
-
-  if(object.properties) {
-    Object.keys(object.properties).forEach(propertyKey => {
-      if(!object.required || !object.required.includes(propertyKey)) 
-        objectDiv.appendChild(
-          create(object.properties[propertyKey], checking, id + "__" + propertyKey, null, false)
-        );
-    });
-  }
-
-  if(object.additionalProperties) {
-    const additionalPropertiesDiv = document.createElement("div");
-    additionalPropertiesDiv.classList.add("additional-properties");
-
-    const addPropertyButton = createButton("button", "Add Additional Property", function() {
-      const apDiv = this.parentNode;
-      
-      if(!object.maxProperties || object.maxProperties > apDiv.querySelectorAll(":scope > .additional-property").length)
-        addAdditionalProperty(object, checking, objectDiv.id, required, additionalPropertiesDiv, removeAPCallback);
-    });
-    
-    additionalPropertiesDiv.appendChild(addPropertyButton);
-
-    // TODO: Consider already required properties
-    if(object.minProperties)
-      for(let i = 1; i <= object.minProperties; i++)
-        addAdditionalProperty(object, checking, objectDiv.id, required, additionalPropertiesDiv, removeAPCallback);
-
-    objectDiv.appendChild(additionalPropertiesDiv);
-  }
-  
-//  if(!required)
-//    objectDiv.querySelectorAll(".disableable:not(.toggler)").forEach(e => {
-//      e.disabled = true;
-//    });
-
-  return objectDiv;
-}
-
-function addAdditionalProperty(object, checking, id, required, additionalPropertiesDiv, removeAPCallback) {
-  let suffix;
-//debugger;
-       if (!additionalPropertiesDiv.querySelector(":scope > .additional-property"))
-         suffix = 1;
-       else
-         suffix = parseInt(
-             additionalPropertiesDiv.lastChild.id.split("__").pop()
-         ) + 1;
-
-  const apId = id + "__additional-properties__" + suffix;
-  const apDiv = document.createElement("div");
-  apDiv.id = apId;
-  apDiv.classList.add("additional-property");
-  propertyKeyInput = createTextInput(apId + "__key", "text", null, null, required);
-  propertyKeyInput.classList.add("additional-property-key");
-  propertyValueDiv = create(object.additionalProperties, checking, apId + "__value", null, required, true);
-
-  const removeAPButton = createButton("button", "Remove Additional Property", removeAPCallback);
-  apDiv.appendChild(removeAPButton);
-  apDiv.appendChild(propertyKeyInput);
-  apDiv.appendChild(propertyValueDiv);
-  enable(propertyValueDiv);
-  additionalPropertiesDiv.appendChild(apDiv);
-}
-
-function createArray(object, checking, id, datalistId, required) {
-  const removeButtonCallback = function() {
-    if (!object.minItems || object.minItems < this.parentNode.parentNode.querySelectorAll(".array-item").length)
-      this.parentNode.remove();
-  };
-
-  const arrayDiv = initElement(id, "array", required);
-
-  const addItemButton = createButton("button", "+", function() {
-    if (!object.maxItems || object.maxItems > arrayDiv.querySelectorAll(".array-item").length)
-      addItem(object.items, checking, id, datalistId, required, arrayDiv, removeButtonCallback);
-  }, "add-button disableable");
-
-  arrayDiv.appendChild(addItemButton);
-
-  if(object.minItems)
-    for(let i = 1; i <= object.minItems; i++)
-      addItem(object.items, checking, id, datalistId, required, arrayDiv, removeButtonCallback);
-
-  checking.check = function() {
-    let valid = true;
-    const valueSet = new Set();
-
-    arrayDiv.querySelectorAll(":scope > .array-item").forEach(i => {
-      const v = i.querySelector(":scope > input").value;
-      valueSet.add(v);
-      valid = valid && this.checkingFunction(v);
-    });
-
-    if (object.uniqueItems === true)
-      valid = valid && (arrayDiv.querySelectorAll(":scope > .array-item").length === valueSet.size);
-
-    return valid;
-  }
-
-//  const arrayDiv = document.createElement("div");
-  arrayDiv.id = id;
-  arrayDiv.classList.add("array");
-//  arrayDiv.appendChild(arrayDiv);
-  
-//  if(!required)
-//    arrayDiv.querySelectorAll(".disableable:not(.toggler)").forEach(e => {
-//      e.disabled = true;
-//    });
-
-  return arrayDiv;
-}
-
-function addItem(object, checking, id, datalistId, required, arrayDiv, removeButtonCallback) {
-  let suffix;
-
-  if (!arrayDiv.querySelector(":scope > .array-item"))
-    suffix = 1;
-  else {
-    const itemsNodeList = arrayDiv.querySelectorAll(":scope > .array-item");
-    const inputId = itemsNodeList.item(itemsNodeList.length - 1).querySelector("input").id;
-    suffix = parseInt(inputId.substring(id.length + 2, inputId.length)) + 1;
-  }
-
-  const itemId = id + "__" + suffix;
-  let itemDiv;
-  
-  if (object)
-    itemDiv = create(object, checking, itemId, datalistId, required, true);
-  else
-    itemDiv = create({type: "string"}, checking, itemId, datalistId, required, true);
-
-  itemDiv.classList.add("array-item");
-  const removeItemButton = createButton("button", "-", removeButtonCallback);
-  itemDiv.appendChild(removeItemButton);
-  enable(itemDiv);
-  arrayDiv.appendChild(itemDiv);
-}
-
-function createString(object, checking, id, inputType = "text", datalistId = null, pattern = null, required = false, aioop = false) {
-  const stringDiv = createTextInputWithLabel(id, "string", inputType, datalistId, pattern, required, aioop);
-
-  stringDiv.check = function() {
-    let valid = true;
-    const v = stringDiv.lastChild.value;
-
-    if (object.pattern && !v.match(new RegExp(object.pattern)))
-      valid = false;
-
-    if (object.minLength)
-      valid = valid && (v.length >= object.minLength)
-
-    if (object.maxLength)
-      valid = valid && (v.length <= object.maxLength)
-
-    return valid;
-  }
-
-  return stringDiv;
-}
-
-function createInteger(object, checking, id, inputType = "text", datalistId = null, required = false, aioop = false) {
-  const integerDiv = createTextInputWithLabel(id, "integer", inputType, datalistId, "\\d+", required, aioop);
-
-  integerDiv.check = function() {
-    let valid;
-    const v = parseInt(integerDiv.lastChild.value);
-    
-    if(integerDiv.lastChild.value.match(new RegExp("\\d+")))
-      valid = true;
-    else
-      valid = false;
-
-    if (object.exclusiveMinimum)
-      valid = valid && (v > object.exclusiveMinimum)
-
-    if (object.exclusiveMaximum)
-      valid = valid && (v < object.exclusiveMaximum)
-
-    if (object.minimum)
-      valid = valid && (v >= object.minimum)
-
-    if (object.maximum)
-      valid = valid && (v <= object.maximum)
-
-    if (object.multipleOf)
-      valid = valid && (v % parseFloat(object.multipleOf) === 0)
-
-    return valid;
-  }
-
-  return integerDiv;
-}
-
-function createTextInputWithLabel(id, type, inputType, datalistId, pattern, required, aioop) {
-  const inputElement = createTextInput(id, inputType, datalistId, pattern);
-  const labelElement = createLabel(id, beautifyId(id));
-
-  const divElement = initElement(id, type, required, aioop);
-  divElement.appendChild(labelElement);
-  divElement.appendChild(inputElement);
-  return divElement;
-}
-
-function beautifyId(id) {
-  // TODO
-  return id;
-}
-
-function htmlizeRegex(pattern) {
-  // TODO
-  return pattern;
-}
-
-function createOneOfButton(i) {
-  const callback = function() {
-    this.disabled = true;
-    this.dataset.state = "enabled";
-
-    this.parentNode.childNodes.forEach(e => {
-      if(e !== this) {
-        e.disabled = false;
-        e.dataset.state = "disabled";
-      }
-    });
-
-    this.parentNode.nextElementSibling.childNodes.forEach((e, j) => {
-      if(i === j)
-        enable(e);
+    default:
+      if(instance.const)
+        element = (new JSCHConst(id, instance, state)).instanceDiv;
       else
-        disable(e);
-    });
+        element = (new JSCHUntyped(id, instance, state, arrayDatalist)).instanceDiv;
   };
 
-  return createButton("button", "Option " + i, callback, "one-of-toggler disableable");
+  return element;
 }
 
-function createToggleButton() {
-  const callback = function() {
-//    debugger;
-    if(this.dataset.state === "enabled") {
-      this.dataset.state = "disabled";
-      disable(this.parentNode);
-    } else if(this.dataset.state === "disabled") {
-      this.dataset.state = "enabled";
-      enable(this.parentNode);
+function createCombiner(id, keyword, combiner) {
+  let element;
+
+  switch(keyword) {
+    case "allOf":
+      element = (new JSCHAllOf(id, combiner)).combinerDiv;
+      break;
+    case "anyOf":
+      element = (new JSCHAnyOf(id, combiner)).combinerDiv;
+      break;
+    case "oneOf":
+      element = (new JSCHOneOf(id, combiner)).combinerDiv;
+      break;
+    case "not":
+      element = (new JSCHNot(id, combiner)).combinerDiv;
+      break;
+  }
+
+  return element;
+}
+
+class JSCHCombiner {
+  constructor(id, activated) {
+    this.combinerDiv = document.createElement("div");
+    this.combinerDiv.id = id;
+    this.combinerDiv.classList.add("jsch-combiner");
+    this.combinerDiv.jsch = this;
+
+    if(activated)
+      this.combinerDiv.classList.add("activated");
+  }
+
+  isActivated() {
+    return this.combinerDiv.classList.contains("activated");
+  }
+
+  isEnabled() {
+    return this.combinerDiv.classList.contains("enabled");
+  }
+
+  isRequired() {
+    return this.combinerDiv.classList.contains("required");
+  }
+}
+
+// TODO
+class JSCHAllOf extends JSCHCombiner {
+  constructor(id, combiner, activated = true) {
+    super(id, activated);
+
+    // TODO: Make sure full deep merging is performed
+    // instance = merge.apply(this, instance.allOf);
+  }
+}
+
+class JSCHAnyOf extends JSCHCombiner {
+  constructor(id, combiner, activated = true) {
+    super(id, activated);
+
+    this.combinerDiv.classList.add("jsch-one-of");
+    this.combinerDiv.appendChild(
+        document.createElement("h5")
+    ).innerHTML = beautifyId(id);
+
+    this.selectorDiv = this.combinerDiv.appendChild(
+        buildRadioInputs(id, [...Array(combiner.length).keys()], {
+          callback: (i) => {
+            this.getSubschema(i).activate();
+            this.getSubschema(i).enable();
+            this.selectorDiv.childNodes[i].classList.add("active");
+            this.getSubschema(i).switchDiv.firstChild.checked = true;
+            
+            this.getSubschemas().forEach((s, j) => {
+              if(i !== j) {
+                s.jsch.deactivate();
+                this.selectorDiv.childNodes[j].classList.remove("active");
+              }
+            });
+          }
+        })
+    );
+
+    this.subschemasDiv = this.combinerDiv.appendChild(
+        document.createElement("div")
+    );
+
+    combiner.forEach((s, i) => {
+      this.subschemasDiv.appendChild(
+          create(s, this.combinerDiv.id + "--" + i, {activated})
+      )
+
+      this.subschemasDiv.lastChild.classList.add("jsch-combiner-subschema");
+    });
+
+    this.initState(activated);
+  }
+
+  getSubschema(i) {
+    return this.subschemasDiv.childNodes[i].jsch;
+  }
+
+  getSubschemas() {
+    return this.subschemasDiv.childNodes;
+  }
+
+  activate() {
+    this.combinerDiv.classList.add("activated");
+
+    this.enable();
+  }
+
+  deactivate() {
+    this.combinerDiv.classList.remove("activated");
+
+    this.subschemasDiv.childNodes.forEach((s, i) => {
+      this.selectorDiv.childNodes[i].firstChild.disabled = true;
+      s.jsch.deactivate();
+    });
+  }
+
+  enable() {
+    this.combinerDiv.classList.add("enabled");
+
+    this.getSubschemas().forEach((s, i) => {
+      this.selectorDiv.childNodes[i].firstChild.disabled = false;
+
+      if(this.selectorDiv.childNodes[i].firstChild.checked) {
+        s.jsch.activate();
+        s.jsch.enable();
+      } else
+        s.jsch.deactivate();
+    });
+  }
+
+  disable() {
+    this.combinerDiv.classList.remove("enabled");
+
+    this.subschemasDiv.childNodes.forEach((s, i) => {
+      this.selectorDiv.childNodes[i].firstChild.disabled = true;
+      s.jsch.deactivate();
+    });
+  }
+
+  initState(activated) {
+    this.selectorDiv.firstChild.firstChild.checked = true;
+    this.subschemasDiv.firstChild.jsch.switchDiv.firstChild.checked = true;
+
+    if(activated)
+      this.activate();
+    else
+      this.deactivate();
+  }
+}
+
+class JSCHOneOf extends JSCHAnyOf {
+  constructor(id, combiner, activated = true) {
+    super(id, combiner, activated);
+  }
+}
+
+class JSCHInstance {
+  constructor(id, state) {
+    this.instanceDiv = document.createElement("div");
+    this.instanceDiv.id = id;
+    this.instanceDiv.classList.add("jsch-instance", "container-fluid");
+    this.instanceDiv.jsch = this;
+
+    this.headerDiv = this.instanceDiv.appendChild(
+        document.createElement("div")
+    );
+
+    this.headerDiv.classList.add("form-group");
+
+    if(state.required)
+      this.instanceDiv.classList.add("required");
+    else {
+      this.switchDiv = this.headerDiv.appendChild(
+          document.createElement("div")
+      );
+
+      this.switchDiv.classList.add("custom-control", "custom-switch");
+
+      const input = this.switchDiv.appendChild(
+          document.createElement("input")
+      );
+
+      input.type = "checkbox";
+      input.id = id + "--switch";
+      input.classList.add("custom-control-input");
+
+      input.addEventListener("click", this.switchCallback.bind(this));
+
+      const label = this.switchDiv.appendChild(
+          document.createElement("label")
+      );
+
+      label.htmlFor = input.id;
+      label.classList.add("custom-control-label", "mr-sm-1");
     }
 
-//    this.parentNode.querySelectorAll(".disableable").forEach(e => {
-//      if(e !== this)
-//        e.disabled = disable;
-//
-//      if(e.classList.contains("toggler"))
-//        if(!disable)
-//          e.dataset.state = "enabled";
-//        else
-//          e.dataset.state = "disabled";
-//    });
-  };
-  return createButton("button", "Toggle enabled", callback, "toggler disableable");
+    if(state.activated) {
+      this.instanceDiv.classList.add("activated");
+
+      if(state.enabled)
+        this.instanceDiv.classList.add("enabled");
+    }
+  }
+
+  isActivated() {
+    return this.instanceDiv.classList.contains("activated");
+  }
+
+  isEnabled() {
+    return this.instanceDiv.classList.contains("enabled");
+  }
+
+  isRequired() {
+    return this.instanceDiv.classList.contains("required");
+  }
+
+  setCombiners(id, instance) {
+    if(instance.oneOf || instance.allOf || instance.anyOf || instance.not) {
+      this.combinersDiv = this.instanceDiv.appendChild(document.createElement("div"));
+
+      if(instance.allOf)
+        this.combinersDiv.appendChild(createCombiner(id + "__jsch:all-of", "allOf", instance.allOf));
+
+      if(instance.anyOf)
+        this.combinersDiv.appendChild(createCombiner(id + "__jsch:any-of", "anyOf", instance.anyOf));
+
+      if(instance.oneOf)
+        this.combinersDiv.appendChild(createCombiner(id + "__jsch:one-of", "oneOf", instance.oneOf));
+
+      if(instance.not)
+        this.combinersDiv.appendChild(createCombiner(id + "__jsch:not", "not", instance.not));
+    }
+  }
+
+  getCombiners() {
+    const combiners = new Array();
+
+    if(this.combinersDiv)
+      this.combinersDiv.childNodes.forEach(c => {
+        combiners.push(c);
+      });
+
+    return combiners;
+  }
+
+  switchCallback() {
+    if(this.isEnabled())
+      this.disable();
+    else
+      this.enable();
+  }
+}
+
+class JSCHUntyped extends JSCHInstance {
+  constructor(id, instance, state, arrayDatalist = null) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-untyped");
+    this.headerDiv.appendChild(
+        document.createElement("label")
+    ).appendChild(
+        document.createElement("h5")
+    ).innerHTML = beautifyId(id);
+
+    this.setCombiners(id, instance);
+
+    if(arrayDatalist)
+      this.datalist = arrayDatalist;
+    else if(instance.enum) {
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, instance.enum)
+      );
+    }
+
+    this.initState();
+  }
+
+  activate() {
+    this.instanceDiv.classList.add("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = false;
+
+    if(this.isRequired() || this.isEnabled())
+      this.getCombiners().forEach(c => {
+        c.jsch.activate();
+      });
+  }
+
+  deactivate() {
+    this.instanceDiv.classList.remove("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = true;
+
+    this.getCombiners().forEach(c => {
+      c.jsch.deactivate();
+    });
+  }
+
+  enable() {
+    this.instanceDiv.classList.add("enabled");
+//    this.setToggleButtonText("Disable");
+
+    this.getCombiners().forEach(c => {
+      c.jsch.activate();
+    });
+  }
+
+  disable() {
+    this.instanceDiv.classList.remove("enabled");
+//    this.setToggleButtonText("Enable");
+
+    this.getCombiners().forEach(c => {
+      c.jsch.deactivate();
+    });
+  }
+
+  initState() {
+    if(this.isRequired() || this.isEnabled()) {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = true;
+
+      this.enable();
+    } else {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = false;
+
+      this.disable();
+    }
+
+    if(!this.isActivated())
+      this.deactivate();
+  }
+}
+
+class JSCHConst extends JSCHInstance {
+  constructor(id, instance, state) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-const");
+    this.instanceDiv.classList.add("form-group");
+
+    const label = this.instanceDiv.appendChild(
+        document.createElement("label")
+    );
+
+    label.htmlFor = id + "--input";
+    label.innerHTML = beautifyId(id);
+
+    this.const = this.instanceDiv.appendChild(buildTextInput(id));
+    this.const.value = instance.const;
+    this.initState();
+  }
+
+  getValue() {
+    return this.const.value;
+  }
+
+  activate() {
+    this.instanceDiv.classList.add("activated");
+  }
+
+  deactivate() {
+    this.instanceDiv.classList.remove("activated");
+  }
+
+  enable() {
+    this.instanceDiv.classList.add("enabled");
+  }
+
+  disable() {
+    this.instanceDiv.classList.remove("enabled");
+  }
+
+  initState() {
+    this.const.readOnly = true;
+
+    if(!this.isActivated())
+      this.deactivate();
+  }
+}
+
+class JSCHNull extends JSCHInstance {
+  constructor(id, instance, state) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-null");
+    this.instanceDiv.classList.add("form-group");
+
+    const label = this.instanceDiv.appendChild(
+        document.createElement("label")
+    );
+
+    label.htmlFor = id + "--input";
+    label.innerHTML = beautifyId(id);
+
+    this.extractKeywords(instance);
+
+    this.null = this.instanceDiv.appendChild(buildTextInput(id));
+    this.null.value = "null";
+    this.initState();
+  }
+
+  extractKeywords(instance) {
+    this.keywords = {
+      type: instance.type
+    };
+  }
+
+  getValue() {
+    return this.null.value;
+  }
+
+  activate() {
+    this.instanceDiv.classList.add("activated");
+  }
+
+  deactivate() {
+    this.instanceDiv.classList.remove("activated");
+  }
+
+  enable() {
+    this.instanceDiv.classList.add("enabled");
+  }
+
+  disable() {
+    this.instanceDiv.classList.remove("enabled");
+  }
+
+  initState() {
+    this.const.readOnly = true;
+
+    if(!this.isActivated())
+      this.deactivate();
+  }
+}
+
+class JSCHObject extends JSCHInstance {
+  constructor(id, instance, state, arrayDatalist = null) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-object");
+    this.headerDiv.appendChild(
+        document.createElement("label")
+    ).appendChild(
+        document.createElement("h5")
+    ).innerHTML = beautifyId(id);
+
+    this.extractKeywords(instance);
+
+    if(arrayDatalist)
+      this.datalist = arrayDatalist;
+    else if(this.keywords.enum) {
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, this.keywords.enum)
+      );
+    }
+
+    if(this.keywords.properties)
+      Object.keys(this.keywords.properties).forEach(propertyKey => {
+        if(this.keywords.required && this.keywords.required.includes(propertyKey))
+          this.addProperty(propertyKey, true);
+        else
+          this.addProperty(propertyKey, false);
+      });
+
+    if(this.keywords.additionalProperties) {
+      this.additionalPropertiesDiv = this.instanceDiv.appendChild(
+          document.createElement("div")
+      );
+
+      this.additionalPropertiesDiv.classList.add("additional-properties");
+
+      this.addAPButton = this.additionalPropertiesDiv.appendChild(
+          document.createElement("button")
+      );
+
+      this.addAPButton.type = "button";
+      this.addAPButton.classList.add("btn", "btn-secondary");
+      this.addAPButton.innerHTML = "Add additional property";
+      this.addAPButton.addEventListener("click", this.addAPButtonCallback);
+
+      if(this.keywords.minProperties)
+        if(this.keywords.properties)
+          for(let i = 0; i < this.keywords.minProperties - Object.keys(this.keywords.properties).length; i++)
+            this.addAdditionalProperty();
+        else
+          for(let i = 0; i < this.keywords.minProperties; i++)
+            this.addAdditionalProperty();
+    }
+
+    this.setCombiners(id, instance);
+    this.initState();
+  }
+
+  extractKeywords(instance) {
+    this.keywords = {
+      type: instance.type,
+      properties: instance.properties,
+      additionalProperties: instance.additionalProperties,
+      required: instance.required,
+      minProperties: instance.minProperties,
+      maxProperties: instance.maxProperties,
+      propertyNames: instance.propertyNames,
+      patternProperties: instance.patternProperties,
+      dependencies: instance.dependencies,
+      enum: instance.enum
+    };
+  }
+
+  activate() {
+    this.instanceDiv.classList.add("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = false;
+
+    if(this.isRequired() || this.isEnabled())
+      this.enable()
+  }
+
+  deactivate() {
+    this.instanceDiv.classList.remove("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = true;
+
+    this.disable(true);
+  }
+
+  enable() {
+    this.instanceDiv.classList.add("enabled");
+//    this.setToggleButtonText("Disable");
+
+    if(this.keywords.properties)
+      this.getProperties().forEach(i => {
+        i.jsch.activate();
+      });
+
+    if(this.keywords.additionalProperties) {
+      this.addAPButton.disabled = false;
+
+      this.getAdditionalProperties().forEach(i => {
+        i.key.disabled  = false;
+        i.value.jsch.activate();
+        i.button.disabled = false;
+      });
+    }
+  }
+
+  disable(preserveState = false) {
+    if(!preserveState) {
+      this.instanceDiv.classList.remove("enabled");
+//      this.setToggleButtonText("Enable");
+    }
+
+    if(this.keywords.properties)
+      this.getProperties().forEach(i => {
+        i.jsch.deactivate();
+      });
+
+    if(this.keywords.additionalProperties) {
+      this.addAPButton.disabled = true;
+
+      this.getAdditionalProperties().forEach(i => {
+        i.key.disabled  = true;
+        i.value.jsch.deactivate();
+        i.button.disabled = true;
+      });
+    }
+  }
+
+  initState() {
+    if(this.isRequired() || this.isEnabled()) {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = true;
+
+      this.enable();
+    } else {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = false;
+
+      this.disable();
+    }
+
+    if(!this.isActivated())
+      this.deactivate();
+  }
+
+  addProperty(propertyKey, required) {
+    const state = {required, activated: this.isEnabled(), enabled: false};
+
+    this.instanceDiv.appendChild(
+        create(this.keywords.properties[propertyKey], this.instanceDiv.id + "__" + propertyKey, state)
+    );
+  }
+
+  addAdditionalProperty() {
+    let suffix;
+
+    if (!this.getAdditionalProperties().length)
+      suffix = 1;
+    else
+      suffix = parseInt(
+          this.additionalPropertiesDiv.lastChild.id.split("-").pop()
+      ) + 1;
+
+    const apDiv = this.additionalPropertiesDiv.appendChild(
+        document.createElement("div")
+    );
+    apDiv.id = this.instanceDiv.id + "__jsch:ap-" + suffix;
+    apDiv.classList.add("jsch-additional-property");
+
+    const keyDiv = apDiv.appendChild(
+        document.createElement("div")
+    );
+
+    keyDiv.classList.add("form-group");
+
+    const keyLabel = keyDiv.appendChild(
+        document.createElement("label")
+    );
+
+    keyLabel.htmlFor = apDiv.id + "--key--input";
+    keyLabel.innerHTML = beautifyId(keyLabel.htmlFor);
+
+    keyDiv.appendChild(
+        buildTextInput(apDiv.id + "--key")
+    );
+
+    const state = {required: true, activated: this.isEnabled(), enabled: this.isEnabled()};
+
+    apDiv.appendChild(
+        create(this.keywords.additionalProperties, apDiv.id + "--value", state)
+    );
+
+    const removeAPButton = apDiv.appendChild(
+        document.createElement("button")
+    );
+
+    removeAPButton.type = "button";
+    removeAPButton.classList.add("btn", "btn-secondary");
+    removeAPButton.innerHTML = "Remove additional property";
+    removeAPButton.addEventListener("click", this.removeAPButtonCallback);
+  }
+
+  getProperties() {
+    const properties = new Array();
+
+    this.instanceDiv.childNodes.forEach(p => {
+      if(p.classList.contains("jsch-instance")) {
+        properties.push(p);
+      }
+    });
+
+    return properties;
+  }
+
+  getAdditionalProperties() {
+    const aps = new Array();
+
+    if (this.additionalPropertiesDiv)
+      this.additionalPropertiesDiv.childNodes.forEach(i => {
+        if(i.classList.contains("jsch-additional-property")) {
+          let ap = new Object();
+          ap.key = i.firstChild.lastChild;
+          ap.value = i.firstChild.nextElementSibling;
+          ap.button = i.lastChild;
+          aps.push(ap);
+        }
+      });
+
+    return aps;
+  }
+
+  addAPButtonCallback() {
+    const jschObject = this.parentNode.parentNode.jsch;
+
+    if (!jschObject.keywords.maxProperties || jschObject.keywords.maxProperties > jschObject.getAdditionalProperties().length)
+      jschObject.addAdditionalProperty();
+  }
+
+  removeAPButtonCallback() {
+    const jschObject = this.parentNode.parentNode.parentNode.jsch;
+
+    if (!jschObject.keywords.minProperties || jschObject.keywords.minProperties < jschObject.getAdditionalProperties().length)
+      this.parentNode.remove();
+  }
+}
+
+class JSCHArray extends JSCHInstance {
+  constructor(id, instance, state, arrayDatalist = null) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-array");
+    this.headerDiv.appendChild(
+        document.createElement("label")
+    ).appendChild(
+        document.createElement("h5")
+    ).innerHTML = beautifyId(id);
+
+    this.extractKeywords(instance);
+
+    // TODO: Ensure implementation of tuple-validation and enums of arrays
+    if(arrayDatalist)
+      this.datalist = arrayDatalist;
+    else if(this.keywords.enum) {
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, this.keywords.enum)
+      );
+    } else if(this.keywords.items && this.keywords.items.enum) { // List validation with enum
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, this.keywords.items.enum)
+      );
+    }
+
+    this.addArrayItemButton = this.instanceDiv.appendChild(
+        document.createElement("button")
+    );
+
+    this.addArrayItemButton.type = "button";
+    this.addArrayItemButton.classList.add("add-array-item-button");
+    this.addArrayItemButton.classList.add("btn", "btn-secondary");
+    this.addArrayItemButton.innerHTML = "+";
+    this.addArrayItemButton.addEventListener("click", this.addArrayItemButtonCallback);
+
+    if(this.keywords.minItems)
+      for(let i = 0; i < this.keywords.minItems; i++)
+        this.addArrayItem();
+
+    this.setCombiners(id, instance);
+    this.initState();
+  }
+
+  extractKeywords(instance) {
+    this.keywords = {
+      type: instance.type,
+      items: instance.items,
+      additionalItems: instance.additionalItems,
+      contains: instance.contains,
+      minItems: instance.minItems,
+      maxItems: instance.maxItems,
+      uniqueItems: instance.uniqueItems,
+      enum: instance.enum
+    };
+  }
+
+  activate() {
+    this.instanceDiv.classList.add("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = false;
+
+    if(this.isRequired() || this.isEnabled())
+      this.enable();
+  }
+
+  deactivate() {
+    this.instanceDiv.classList.remove("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = true;
+
+    this.disable(true);
+  }
+
+  enable() {
+    this.instanceDiv.classList.add("enabled");
+//    this.setToggleButtonText("Disable");
+
+    this.addArrayItemButton.disabled = false;
+
+    this.getArrayItems().forEach(i => {
+      i.lastChild.disabled  = false;
+      i.jsch.activate();
+    });
+  }
+
+  disable(preserveState = false) {
+    if(!preserveState) {
+      this.instanceDiv.classList.remove("enabled");
+//      this.setToggleButtonText("Enable");
+    }
+
+    this.addArrayItemButton.disabled = true;
+
+    this.getArrayItems().forEach(i => {
+      i.lastChild.disabled  = true;
+      i.jsch.deactivate();
+    });
+  }
+
+  initState() {
+    if(this.isRequired() || this.isEnabled()) {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = true;
+
+      this.enable();
+    } else {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = false;
+
+      this.disable();
+    }
+
+    if(!this.isActivated())
+      this.deactivate();
+  }
+
+  getArrayItems() {
+    const arrayItems = new Array();
+
+    this.instanceDiv.childNodes.forEach(i => {
+      if(i.classList.contains("jsch-array-item"))
+        arrayItems.push(i);
+    });
+
+    return arrayItems;
+  }
+
+  addArrayItem() {
+    let suffix;
+
+    const arrayItems = this.getArrayItems();
+
+    if (arrayItems.length === 0)
+      suffix = 1;
+    else
+      suffix = parseInt(
+          arrayItems[arrayItems.length - 1].id.split("-").pop()
+      ) + 1;
+
+    const state = {required: true, activated: this.isEnabled(), enabled: false};
+    const itemId = this.instanceDiv.id + "__jsch:ai-" + suffix;
+    let itemDiv;
+
+    if(this.datalist)
+      itemDiv = create(this.keywords.items, itemId, state, this.datalist);
+    else
+      itemDiv = create(this.keywords.items, itemId, state);
+
+    itemDiv.classList.add("jsch-array-item");
+
+    const removeArrayItemButton = itemDiv.appendChild(
+        document.createElement("button")
+    );
+
+    removeArrayItemButton.type = "button";
+    removeArrayItemButton.classList.add("btn", "btn-secondary");
+    removeArrayItemButton.innerHTML = "-";
+    removeArrayItemButton.addEventListener("click", this.removeArrayItemButtonCallback);
+
+    this.instanceDiv.appendChild(itemDiv);
+  }
+
+  addArrayItemButtonCallback() {
+    const jschArray = this.parentNode.jsch;
+
+    if (!jschArray.keywords.maxItems || jschArray.keywords.maxItems > jschArray.getArrayItems().length)
+      jschArray.addArrayItem();
+  }
+
+  removeArrayItemButtonCallback() {
+    const jschArray = this.parentNode.parentNode.jsch;
+
+    if (!jschArray.keywords.minItems || jschArray.keywords.minItems < jschArray.getArrayItems().length)
+      this.parentNode.remove();
+  }
+}
+
+class JSCHLiteralInstance extends JSCHInstance {
+  constructor(id, state) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("form-group");
+
+    const label = this.instanceDiv.appendChild(
+        document.createElement("label")
+    );
+
+    label.htmlFor = id + "--input";
+    label.innerHTML = beautifyId(id);
+  }
+
+  activate() {
+    this.instanceDiv.classList.add("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = false;
+
+    if(this.isRequired() || this.isEnabled())
+      this.enable();
+  }
+
+  deactivate() {
+    this.instanceDiv.classList.remove("activated");
+
+    if(!this.isRequired())
+      this.switchDiv.firstChild.disabled = true;
+
+    this.disable(true);
+  }
+
+  enable() {
+    this.instanceDiv.classList.add("enabled");
+    this.input.disabled = false;
+  }
+
+  disable(preserveState = false) {
+    if(!preserveState) {
+      this.instanceDiv.classList.remove("enabled");
+      this.switchDiv.firstChild.checked = false;
+    }
+
+    this.input.disabled = true;
+  }
+
+  initState() {
+    if(this.isRequired() || this.isEnabled()) {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = true;
+
+      this.enable();
+    } else {
+      if(this.switchDiv)
+        this.switchDiv.firstChild.checked = false;
+
+      this.disable();
+    }
+
+    if(!this.isActivated())
+      this.deactivate();
+  }
+}
+
+class JSCHBoolean extends JSCHLiteralInstance {
+  constructor(id, state) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-boolean");
+    this.instanceDiv.classList.add("custom-control", "custom-checkbox");
+
+    this.input = this.instanceDiv.appendChild(
+        buildCheckboxInput(id, "true")
+    );
+
+    this.input.id = id + "--input";
+    this.input.classList.add("custom-control-input");
+
+    this.label = this.instanceDiv.appendChild(
+        document.createElement("label")
+    );
+
+    this.label.htmlFor = this.input.id;
+    this.label.classList.add("custom-control-label");
+
+    this.initState();
+  }
+
+  getValue() {
+    if (this.input.checked)
+      return true;
+    else
+      return false;
+  }
+
+  check() {
+    return true;
+  }
+}
+
+class JSCHString extends JSCHLiteralInstance {
+  constructor(id, instance, state, arrayDatalist = null) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-string");
+    this.extractKeywords(instance);
+
+    if(arrayDatalist)
+      this.datalist = arrayDatalist;
+    else if(this.keywords.enum) {
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, this.keywords.enum)
+      );
+    }
+
+    if(this.datalist)
+      this.input = this.instanceDiv.appendChild(
+          buildTextInput(id, this.keywords.pattern, this.datalist.id)
+      );
+    else
+      this.input = this.instanceDiv.appendChild(
+          buildTextInput(id, this.keywords.pattern)
+      );
+
+    this.setCombiners(id, instance);
+    this.initState();
+  }
+
+  getValue() {
+    return this.input.value;
+  }
+
+  extractKeywords(instance) {
+    this.keywords = {
+      type: instance.type,
+      minLength: instance.minLength,
+      maxLength: instance.maxLength,
+      pattern: instance.pattern,
+      format: instance.format, // TODO: Not supported
+      enum: instance.enum
+    };
+  }
+
+  check() {
+    const v = this.getValue();
+    let valid = true;
+
+    if (this.keywords.pattern)
+      valid = valid && RegExp(this.keywords.pattern).test(v);
+
+    if (this.keywords.minLength)
+      valid = valid && (v.length >= this.keywords.minLength);
+
+    if (this.keywords.maxLength)
+      valid = valid && (v.length <= this.keywords.maxLength);
+
+    if (this.keywords.enum)
+      valid = valid && this.keywords.enum.some(o => {
+        return v === o;
+      });
+
+    return valid;
+  }
+}
+
+class JSCHInteger extends JSCHLiteralInstance {
+  constructor(id, instance, state, arrayDatalist = null) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-integer");
+    this.extractKeywords(instance);
+
+    if(arrayDatalist)
+      this.datalist = arrayDatalist;
+    else if(this.keywords.enum) {
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, this.keywords.enum)
+      );
+    }
+
+    if(this.datalist)
+      this.input = this.instanceDiv.appendChild(
+          buildTextInput(id, this.keywords.pattern, this.datalist.id)
+      );
+    else
+      this.input = this.instanceDiv.appendChild(
+          buildTextInput(id, "^(-|\\+)?\\d+$")
+      );
+
+    this.setCombiners(id, instance);
+    this.initState();
+  }
+
+  getValue() {
+    return parseInt(this.input.value);
+  }
+
+  extractKeywords(instance) {
+    this.keywords = {
+      type: instance.type,
+      exclusiveMinimum: instance.exclusiveMinimum,
+      exclusiveMaximum: instance.exclusiveMaximum,
+      minimum: instance.minimum,
+      maximum: instance.maximum,
+      multipleOf: instance.multipleOf,
+      enum: instance.enum
+    };
+  }
+
+  check() {
+    const v = this.getValue();
+    let valid = RegExp("^(-|\\+)?\\d+$").test(v.toString());
+
+    if (this.keywords.exclusiveMinimum)
+      valid = valid && (v > this.keywords.exclusiveMinimum);
+
+    if (this.keywords.exclusiveMaximum)
+      valid = valid && (v < this.keywords.exclusiveMaximum);
+
+    if (this.keywords.minimum)
+      valid = valid && (v >= this.keywords.minimum);
+
+    if (this.keywords.maximum)
+      valid = valid && (v <= this.keywords.maximum);
+
+    if (this.keywords.multipleOf)
+      valid = valid && (v % parseFloat(this.keywords.multipleOf) === 0);
+
+    if (this.keywords.enum)
+      valid = valid && this.keywords.enum.some(o => {
+        return v === parseInt(o);
+      });
+
+    return valid;
+  }
+}
+
+class JSCHNumber extends JSCHLiteralInstance {
+  constructor(id, instance, state, arrayDatalist = null) {
+    super(id, state);
+
+    this.instanceDiv.classList.add("jsch-number");
+    this.extractKeywords(instance);
+
+    if(arrayDatalist)
+      this.datalist = arrayDatalist;
+    else if(this.keywords.enum) {
+      this.datalist = this.instanceDiv.appendChild(
+          buildDatalist(id, this.keywords.enum)
+      );
+    }
+
+    if(this.datalist)
+      this.input = this.instanceDiv.appendChild(
+          buildTextInput(id, this.keywords.pattern, this.datalist.id)
+      );
+    else
+      this.input = this.instanceDiv.appendChild(
+          buildTextInput(id, "^(-|\\+)?\\d+(\\.\\d+)*$")
+      );
+
+    this.setCombiners(id, instance);
+    this.initState();
+  }
+
+  getValue() {
+    return parseFloat(this.input.value);
+  }
+
+  extractKeywords(instance) {
+    this.keywords = {
+      type: instance.type,
+      exclusiveMinimum: instance.exclusiveMinimum,
+      exclusiveMaximum: instance.exclusiveMaximum,
+      minimum: instance.minimum,
+      maximum: instance.maximum,
+      multipleOf: instance.multipleOf,
+      enum: instance.enum
+    };
+  }
+
+  check() {
+    const v = this.getValue();
+    let valid = RegExp("^(-|\\+)?\\d+(\\.\\d+)*$").test(v.toString());
+
+    if (this.keywords.exclusiveMinimum)
+      valid = valid && (v > this.keywords.exclusiveMinimum);
+
+    if (this.keywords.exclusiveMaximum)
+      valid = valid && (v < this.keywords.exclusiveMaximum);
+
+    if (this.keywords.minimum)
+      valid = valid && (v >= this.keywords.minimum);
+
+    if (this.keywords.maximum)
+      valid = valid && (v <= this.keywords.maximum);
+
+    if (this.keywords.multipleOf)
+      valid = valid && (v % parseFloat(this.keywords.multipleOf) === 0);
+
+    if (this.keywords.enum)
+      valid = valid && this.keywords.enum.some(o => {
+        return v === parseFloat(o);
+      });
+
+    return valid;
+  }
+}
+
+function buildDatalist(instanceId, enumArray) {
+  const datalist = document.createElement("datalist");
+  datalist.id = instanceId + "--datalist";
+
+  // TODO: Support for complex objects in datalist
+  enumArray.forEach(datum => {
+    datalist.appendChild(document.createElement("option")).value = datum;
+  });
+
+  return datalist;
+}
+
+function buildTextInput(instanceId, pattern = "^.+$", datalistId = null) {
+  const input = document.createElement("input");
+  input.type = "text";
+  input.id = instanceId + "--input";
+  input.name = instanceId;
+  input.classList.add("form-control", "mx-sm-3");
+  input.required = true;
+
+  if (datalistId)
+    input.setAttribute("list", datalistId);
+
+  if (pattern)
+    input.pattern = pattern;
+
+  return input;
+}
+
+function buildCheckboxInput(instanceId, value) {
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.name = instanceId;
+  input.value = value;
+  return input;
+}
+
+function buildRadioInputs(instanceId, values, {labels = null, callback = null} = {}) {
+  const div = document.createElement("div");
+
+  div.classList.add("btn-group", "btn-group-toggle");
+  div.dataset.toggle = instanceId;
+
+  values.forEach((v, i) => {
+
+    const label = div.appendChild(
+        document.createElement("label")
+    );
+
+    const input = label.appendChild(
+        document.createElement("input")
+    );
+
+    input.type = "radio";
+    input.id = instanceId + "--" + i.toString();
+    input.name = instanceId;
+    input.value = v;
+
+    if(!i) {
+      label.classList.add("btn", "btn-secondary", "active");
+      input.checked = true;
+    } else
+      label.classList.add("btn", "btn-secondary");
+
+    if(labels)
+      label.appendChild(
+          document.createTextNode(labels[i])
+      );
+    else
+      label.appendChild(
+          document.createTextNode("Option " + i.toString())
+      );
+
+    if (callback)
+      input.addEventListener("change", () => { callback(i); });
+  });
+
+  return div;
 }
 
 function createButton(type, text, callback, classList = "disableable") {
@@ -484,105 +1338,169 @@ function createButton(type, text, callback, classList = "disableable") {
   return buttonElement;
 }
 
-function createDatalist(datalistId, datalist) {
-  const datalistElement = document.createElement("datalist");
-  datalistElement.id = datalistId;
-
-  // TODO: Support for complex objects in datalist
-  datalist.forEach(datum => {
-    const optionElement = document.createElement("option");
-    optionElement.value = datum;
-    datalistElement.appendChild(optionElement);
-  });
-
-  return datalistElement;
+function beautifyId(id) {
+  // TODO
+  return id.split("__").pop();
 }
 
-function createLabel(labeledId, text) {
-  const labelElement = document.createElement("label");
-  labelElement.htmlFor = labeledId;
-  labelElement.innerHTML = text;
+function htmlizeRegex(pattern) {
+  // TODO
+  return pattern;
+}
 
-//  if (required) {
-//    const requiredAbbr = document.createElement("abbr");
-//    requiredAbbr.title = "required";
-//    requiredAbbr.innerHTML = "*";
-//    labelElement.appendChild(requiredAbbr);
+//let merge = (...arguments) => {
+//
+//  // Variables
+//  let target = {};
+//  let i = 0;
+//
+//  // Merge the object into the target object
+//  let merger = (obj) => {
+//   for (let prop in obj) {
+//       if (obj.hasOwnProperty(prop)) {
+//           if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
+//               // If we're doing a deep merge and the property is an object
+//               target[prop] = merge(target[prop], obj[prop]);
+//           } else {
+//               // Otherwise, do a regular merge
+//               target[prop] = obj[prop];
+//           }
+//       }
+//   }
+//  };
+//
+//  //Loop through each object and conduct a merge
+//  for (; i < arguments.length; i++) {
+//   merger(arguments[i]);
 //  }
+//
+//  return target;
+//};
 
-  return labelElement;
+function extractKey(element) {
+  let key;
+
+  if(element.parentNode.classList.contains("jsch-additional-property"))
+    key = element.previousElementSibling.lastChild.value;
+  else if(element.classList.contains("jsch-array-item"))
+    key = extractKey(element.parentNode);
+  else if(element.classList.contains("jsch-combiner-subschema"))
+    key = extractKey(element.parentNode.parentNode.parentNode.parentNode);
+  else
+    key = element.id.split("__").pop();
+
+  return key;
 }
 
-function createTextInput(id, inputType, datalistId = null, pattern = null, required = true) {
-  let inputElement;
+function checkFormFields(element, parentObject, checkResults) {
+  const key = extractKey(element);
 
-  switch(inputType) {
-    case "const":
-      inputElement = document.createElement("input");
-      inputElement.type = "text";
-      break;
-    default:
-    case "text":
-      inputElement = document.createElement("input");
-      inputElement.type = "text";
-      inputElement.classList.add("disableable");
-      break;
-    case "textarea":
-      inputElement = document.createElement("textarea");
-      inputElement.classList.add("disableable");
-      break;
-  };
+  if(element.classList.contains("jsch-array")) {
+    if(!element.jsch.isEnabled())
+      return;
 
-  inputElement.id = id;
-  inputElement.name = id;
+    let p;
 
-  if (datalistId)
-    inputElement.setAttribute("list", datalistId);
+    if(element.classList.contains("jsch-array-item")) {
+      const len = parentObject.push(new Array());
+      p = parentObject[len - 1];
+    } else {
+      parentObject[key] = new Array();
+      p = parentObject[key];
+    }
 
-  if (pattern)
-    inputElement.pattern = pattern;
+    element.jsch.getArrayItems().forEach(e => {
+      checkFormFields(e, p, checkResults);
+    });
+  } else if(element.classList.contains("jsch-object")) {
+    if(!element.jsch.isEnabled())
+      return;
 
-  inputElement.required = required;
-  return inputElement;
-}
+    let p;
 
-let merge = (...arguments) => {
+    if(Object.entries(parentObject).length === 0 && parentObject.constructor === Object)
+      p = parentObject;
+    else if(element.classList.contains("jsch-array-item")) {
+      const len = parentObject.push(new Object());
+      p = parentObject[len - 1];
+    } else {
+      parentObject[key] = new Object();
+      p = parentObject[key];
+    }
 
-  // Variables
-  let target = {};
-  let i = 0;
+    element.jsch.getProperties().forEach(e => {
+      checkFormFields(e, p, checkResults);
+    });
 
-  // Merge the object into the target object
-  let merger = (obj) => {
-   for (let prop in obj) {
-       if (obj.hasOwnProperty(prop)) {
-           if (Object.prototype.toString.call(obj[prop]) === '[object Object]') {
-               // If we're doing a deep merge and the property is an object
-               target[prop] = merge(target[prop], obj[prop]);
-           } else {
-               // Otherwise, do a regular merge
-               target[prop] = obj[prop];
-           }
-       }
-   }
-  };
+    element.jsch.getAdditionalProperties().forEach(e => {
+      checkFormFields(e.value, p, checkResults);
+    });
+  } else if(element.classList.contains("jsch-untyped")) {
+    if(!element.jsch.isEnabled())
+      return;
 
-  //Loop through each object and conduct a merge
-  for (; i < arguments.length; i++) {
-   merger(arguments[i]);
+    element.jsch.getCombiners().forEach(c => {
+      if(c.classList.contains("jsch-any-of") || c.classList.contains("jsch-one-of"))
+        c.jsch.getSubschemas().forEach(s => {
+          if(s.jsch.isActivated())
+            checkFormFields(s, parentObject, checkResults);
+        });
+    });
+  } else if(
+    element.classList.contains("jsch-boolean") ||
+    element.classList.contains("jsch-integer") ||
+    element.classList.contains("jsch-number")  ||
+    element.classList.contains("jsch-string")
+  ) {
+    if(!element.jsch.isEnabled())
+      return;
+
+    if(element.classList.contains("jsch-array-item"))
+      parentObject.push(element.jsch.getValue());
+    else
+      parentObject[key] = element.jsch.getValue();
+
+    checkResults.set(element.id, element.jsch.check());
+  } else if(
+    element.classList.contains("jsch-const") ||
+    element.classList.contains("jsch-null")
+  ) {
+    if(element.classList.contains("jsch-array-item"))
+      parentObject.push(element.jsch.getValue());
+    else
+      parentObject[key] = element.jsch.getValue();
   }
+}
 
-  return target;
-};
+function getJSONForm(form) {
+  const data = new Object();
+  const checkResultsMap = new Map();
+  checkFormFields(form.firstChild, data, checkResultsMap);
+  return [data, checkResultsMap];
+}
 
 function sendForm() {
-  console.log(this);
-  this.querySelectorAll("input:not([disabled])").forEach(e => {
-    if(!e.classList.contains("additional-property-key") && e.type !== "submit")
-      console.log(e.parentNode.check());
-  });
+  const form = this.parentNode;
+  const [data, checkResultsMap] = getJSONForm(form);
 
-  // TODO: Implement form sending
-  console.log("Sending form not implemented yet");
-  return false;
-};
+  let valid = true;
+
+  checkResultsMap.forEach((value, key) => {
+    if(!value) {
+      valid = false;
+      console.error(key + " failed");
+    }
+  });
+  
+  if(valid) {
+    const postHeaders = new Headers();
+    postHeaders.append('Content-Type', 'application/json');
+
+    fetch(serviceUrl, {
+      method: "POST",
+      headers: postHeaders,
+      body: JSON.stringify(data),
+    });
+  } else
+    document.getElementById("result").innerHTML = "Validation failed";
+}
