@@ -15,14 +15,7 @@ $RefParser.dereference(url, (err, schema) => {
 });
 }
 
-function generate(schema, title) {/*
-  const cssLink = document.head.appendChild(
-      document.createElement("link")
-  );
-
-  cssLink.rel = "stylesheet";
-  cssLink.type = "text/css";
-  cssLink.href = "json-schema-forms.css";*/
+function generate(schema, title) {
   const form = document.createElement("form");
   form.classList.add("form-inline");
   form.appendChild(create(schema, title, {activated: true, required: true, enabled: true}));
@@ -46,7 +39,7 @@ function create(instance, id, state, arrayDatalist = null) {
       break;
 
     case "boolean":
-      element = (new JSCHBoolean(id, state)).instanceDiv;
+      element = (new JSCHBoolean(id, instance, state)).instanceDiv;
       break;
 
     case "integer":
@@ -240,7 +233,7 @@ class JSCHOneOf extends JSCHAnyOf {
 }
 
 class JSCHInstance {
-  constructor(id, state) {
+  constructor(id, instance, state) {
     this.instanceDiv = document.createElement("div");
     this.instanceDiv.id = id;
     this.instanceDiv.classList.add("jsch-instance", "container-fluid");
@@ -251,6 +244,8 @@ class JSCHInstance {
     );
 
     this.headerDiv.classList.add("form-group");
+
+    this.annotations = collectAnnotations(instance);
 
     if(state.required)
       this.instanceDiv.classList.add("required");
@@ -338,7 +333,7 @@ class JSCHInstance {
 
 class JSCHUntyped extends JSCHInstance {
   constructor(id, instance, state, arrayDatalist = null) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-untyped");
     this.headerDiv.appendChild(
@@ -421,7 +416,7 @@ class JSCHUntyped extends JSCHInstance {
 
 class JSCHConst extends JSCHInstance {
   constructor(id, instance, state) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-const");
     this.instanceDiv.classList.add("form-group");
@@ -468,7 +463,7 @@ class JSCHConst extends JSCHInstance {
 
 class JSCHNull extends JSCHInstance {
   constructor(id, instance, state) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-null");
     this.instanceDiv.classList.add("form-group");
@@ -523,7 +518,7 @@ class JSCHNull extends JSCHInstance {
 
 class JSCHObject extends JSCHInstance {
   constructor(id, instance, state, arrayDatalist = null) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-object");
     this.headerDiv.appendChild(
@@ -775,7 +770,7 @@ class JSCHObject extends JSCHInstance {
 
 class JSCHArray extends JSCHInstance {
   constructor(id, instance, state, arrayDatalist = null) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-array");
     this.headerDiv.appendChild(
@@ -954,8 +949,8 @@ class JSCHArray extends JSCHInstance {
 }
 
 class JSCHLiteralInstance extends JSCHInstance {
-  constructor(id, state) {
-    super(id, state);
+  constructor(id, instance, state) {
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("form-group");
 
@@ -1019,8 +1014,8 @@ class JSCHLiteralInstance extends JSCHInstance {
 }
 
 class JSCHBoolean extends JSCHLiteralInstance {
-  constructor(id, state) {
-    super(id, state);
+  constructor(id, instance, state) {
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-boolean");
     this.instanceDiv.classList.add("custom-control", "custom-checkbox");
@@ -1056,7 +1051,7 @@ class JSCHBoolean extends JSCHLiteralInstance {
 
 class JSCHString extends JSCHLiteralInstance {
   constructor(id, instance, state, arrayDatalist = null) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-string");
     this.extractKeywords(instance);
@@ -1121,7 +1116,7 @@ class JSCHString extends JSCHLiteralInstance {
 
 class JSCHInteger extends JSCHLiteralInstance {
   constructor(id, instance, state, arrayDatalist = null) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-integer");
     this.extractKeywords(instance);
@@ -1193,7 +1188,7 @@ class JSCHInteger extends JSCHLiteralInstance {
 
 class JSCHNumber extends JSCHLiteralInstance {
   constructor(id, instance, state, arrayDatalist = null) {
-    super(id, state);
+    super(id, instance, state);
 
     this.instanceDiv.classList.add("jsch-number");
     this.extractKeywords(instance);
@@ -1365,6 +1360,24 @@ function generateName(instance, id) {
 function beautifyId(id) {
   // TODO
   return id.split("__").pop();
+}
+
+function collectAnnotations(instance) {
+  const annotations = new Object();
+
+  if(instance.title !== undefined)
+    annotations.title = instance.title;
+
+  if(instance.description !== undefined)
+    annotations.description = instance.description;
+
+  if(instance.default !== undefined)
+    annotations.default = instance.default;
+
+  if(instance.examples !== undefined)
+    annotations.examples = instance.examples;
+
+  return annotations;
 }
 
 function htmlizeRegex(pattern) {
