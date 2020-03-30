@@ -1,11 +1,28 @@
-function generate(schema, title) {
+import $RefParser from "@apidevtools/json-schema-ref-parser";
+
+function buildForm(url) {
+$RefParser.dereference(url, (err, schema) => {
+  if (err) {
+    console.error(err);
+  }
+  else {
+  document.getElementById("root").appendChild(
+      generate(schema, "CBA")
+  );
+
+  document.getElementById("schema").innerHTML = JSON.stringify(schema, null, 2);
+  }
+});
+}
+
+function generate(schema, title) {/*
   const cssLink = document.head.appendChild(
       document.createElement("link")
   );
 
   cssLink.rel = "stylesheet";
   cssLink.type = "text/css";
-  cssLink.href = "json-schema-forms.css";
+  cssLink.href = "json-schema-forms.css";*/
   const form = document.createElement("form");
   form.classList.add("form-inline");
   form.appendChild(create(schema, title, {activated: true, required: true, enabled: true}));
@@ -133,7 +150,7 @@ class JSCHAnyOf extends JSCHCombiner {
             this.getSubschema(i).enable();
             this.selectorDiv.childNodes[i].classList.add("active");
             this.getSubschema(i).switchDiv.firstChild.checked = true;
-            
+
             this.getSubschemas().forEach((s, j) => {
               if(i !== j) {
                 s.jsch.deactivate();
@@ -328,7 +345,7 @@ class JSCHUntyped extends JSCHInstance {
         document.createElement("label")
     ).appendChild(
         document.createElement("h5")
-    ).innerHTML = beautifyId(id);
+    ).innerHTML = generateName(instance, id);
 
     this.setCombiners(id, instance);
 
@@ -414,7 +431,7 @@ class JSCHConst extends JSCHInstance {
     );
 
     label.htmlFor = id + "--input";
-    label.innerHTML = beautifyId(id);
+    label.innerHTML = generateName(instance, id);
 
     this.const = this.instanceDiv.appendChild(buildTextInput(id));
     this.const.value = instance.const;
@@ -461,7 +478,7 @@ class JSCHNull extends JSCHInstance {
     );
 
     label.htmlFor = id + "--input";
-    label.innerHTML = beautifyId(id);
+    label.innerHTML = generateName(instance, id);
 
     this.extractKeywords(instance);
 
@@ -513,7 +530,7 @@ class JSCHObject extends JSCHInstance {
         document.createElement("label")
     ).appendChild(
         document.createElement("h5")
-    ).innerHTML = beautifyId(id);
+    ).innerHTML = generateName(instance, id);
 
     this.extractKeywords(instance);
 
@@ -765,7 +782,7 @@ class JSCHArray extends JSCHInstance {
         document.createElement("label")
     ).appendChild(
         document.createElement("h5")
-    ).innerHTML = beautifyId(id);
+    ).innerHTML = generateName(instance, id);
 
     this.extractKeywords(instance);
 
@@ -1338,6 +1355,13 @@ function createButton(type, text, callback, classList = "disableable") {
   return buttonElement;
 }
 
+function generateName(instance, id) {
+  if (instance.title)
+    return instance.title;
+  else
+    return beautifyId(id);
+}
+
 function beautifyId(id) {
   // TODO
   return id.split("__").pop();
@@ -1491,7 +1515,7 @@ function sendForm() {
       console.error(key + " failed");
     }
   });
-  
+
   if(valid) {
     const postHeaders = new Headers();
     postHeaders.append('Content-Type', 'application/json');
@@ -1504,3 +1528,5 @@ function sendForm() {
   } else
     document.getElementById("result").innerHTML = "Validation failed";
 }
+
+export default buildForm;

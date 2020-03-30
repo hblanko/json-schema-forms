@@ -1,0 +1,17 @@
+{
+  "name": "json-schema-forms",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "setup": "yarn add parcel-bundler --dev",
+    "dev": "parcel index.html",
+    "build": "parcel build index.html --out-dir build --public-url /cookbase/forms --no-source-maps"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "^8.0.0"
+  }
+}
