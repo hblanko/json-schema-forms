@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: Aggregation</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: Aggregation</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-inPlaceApplicators.html">inPlaceApplicators</a>~</span>Aggregation<span class="signature">(keyword, &hellip;init)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>Class that handles keyword collision during aggregation process.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="Aggregation"><span class="type-signature"></span>new Aggregation<span class="signature">(keyword, &hellip;init)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Class constructor.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>keyword</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The aggregated JSON Schema keyword.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>init</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The initial values to aggregate.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line317">line 317</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds a value to the aggregation, or joins the content of another
+<code>Aggregation</code> object.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The value/aggregation to be added/joined.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line328">line 328</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="resolve"><span class="type-signature"></span>resolve<span class="signature">()</span><span class="type-signature"> &rarr; {any}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Generates an aggregated value following the specific rules associated to
+the keyword.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line342">line 342</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+    <dt class="tag-todo">To Do:</dt>
+    <dd class="tag-todo">
+        <ul>
+            <li>Implement specific logic for every keyword.</li>
+        </ul>
+    </dd>
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The value resulted of applying the aggregation rules to the
+different contained values.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-childApplicators.html">childApplicators</a></li><li><a href="module-components.html">components</a></li><li><a href="module-formElement.html">formElement</a></li><li><a href="module-formElementDefinitions.html">formElementDefinitions</a></li><li><a href="module-inPlaceApplicators.html">inPlaceApplicators</a></li><li><a href="module-JsonSchemaForms.html">JsonSchemaForms</a></li><li><a href="module-JsonSchemaKeywords.html">JsonSchemaKeywords</a></li><li><a href="module-JsonSchemaType.html">JsonSchemaType</a></li><li><a href="module-layouts.html">layouts</a></li><li><a href="module-selectors.html">selectors</a></li></ul><h3>Classes</h3><ul><li><a href="module-childApplicators-AdditionalItems.html">AdditionalItems</a></li><li><a href="module-childApplicators-AdditionalProperties.html">AdditionalProperties</a></li><li><a href="module-childApplicators-ArrayHandler.html">ArrayHandler</a></li><li><a href="module-childApplicators-ChildrenHandler.html">ChildrenHandler</a></li><li><a href="module-childApplicators-Items.html">Items</a></li><li><a href="module-childApplicators-ObjectHandler.html">ObjectHandler</a></li><li><a href="module-childApplicators-Properties.html">Properties</a></li><li><a href="module-components-AddButton.html">AddButton</a></li><li><a href="module-components-BooleanInput.html">BooleanInput</a></li><li><a href="module-components-GeneratorIcon.html">GeneratorIcon</a></li><li><a href="module-components-InputTitle.html">InputTitle</a></li><li><a href="module-components-InstanceViewPanel.html">InstanceViewPanel</a></li><li><a href="module-components-LabelTitle.html">LabelTitle</a></li><li><a href="module-components-NumericInput.html">NumericInput</a></li><li><a href="module-components-PillsInstancePanel.html">PillsInstancePanel</a></li><li><a href="module-components-RemoveButton.html">RemoveButton</a></li><li><a href="module-components-RequiredIcon.html">RequiredIcon</a></li><li><a href="module-components-RootIcon.html">RootIcon</a></li><li><a href="module-components-Select.html">Select</a></li><li><a href="module-components-SelectInstancePanel.html">SelectInstancePanel</a></li><li><a href="module-components-TextInput.html">TextInput</a></li><li><a href="module-components-Toggler.html">Toggler</a></li><li><a href="module-formElementDefinitions-State.html">State</a></li><li><a href="module-formElement-FormElement.html">FormElement</a></li><li><a href="module-inPlaceApplicators-Aggregation.html">Aggregation</a></li><li><a href="module-inPlaceApplicators-InPlaceApplicator.html">InPlaceApplicator</a></li><li><a href="module-inPlaceApplicators-IPASchema.html">IPASchema</a></li><li><a href="module-layouts-Layout.html">Layout</a></li><li><a href="module-selectors-Selector.html">Selector</a></li><li><a href="module-selectors-SelectorsContainer.html">SelectorsContainer</a></li><li><a href="module-selectors-SelectorsToolbar.html">SelectorsToolbar</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-childApplicators-ChildApplicator.html">ChildApplicator</a></li><li><a href="module-components-Component.html">Component</a></li><li><a href="module-components-InputComponent.html">InputComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultFormOptions">defaultFormOptions</a></li><li><a href="global.html#formElementByDiv">formElementByDiv</a></li><li><a href="global.html#lcm">lcm</a></li><li><a href="global.html#pointerToId">pointerToId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 26 2020 23:00:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

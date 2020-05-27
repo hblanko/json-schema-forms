@@ -1,0 +1,6 @@
+/*.adoc
+node_modules
+.cache
+/serve
+/tests
+/yarn-error.log

@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+body {
+  background-color: #f5f6f7;
+}
+
+.help-icon {
+  color: grey;
+  transition: 0.3s;
+  opacity: 0.5;
+}
+
+.help-icon:hover {
+  color: #0275d8;
+  opacity: 1;
+  transition: 0.3s;
+  cursor: default;
+}
+
+.fas.fa-bullseye {
+  color: #ff8b8b;
+  font-size: 1.25rem;
+}
+
+.fas.fa-asterisk {
+  color: orange;
+  font-size: 1.25rem;
+}
+
+.fab.fa-sourcetree {
+  color: #ef5350;
+  font-size: 1.25rem;
+}
+
+.btn,
+input.form-control,
+option,
+.dropdown-item {
+  transition: 0.5s;
+}
+
+.form-control {
+  max-width: 300px;
+}
+
+.btn[disabled],
+input.form-control[disabled],
+option[disabled],
+.dropdown-item[disabled] {
+  transition: 0.5s;
+}
+
+label.custom-control-label {
+  cursor: pointer;
+}
+
+.disabled {
+  display: none;
+}
+
+.container-fluid {
+  max-width: var(--container-max-width);
+}
+
+.icon {
+  width: var(--icon-offset);
+  min-width: var(--icon-offset);
+}
+
+.primitive {
+  padding-left: var(--icon-offset);
+}
+
+:root {
+  --icon-offset: 40px;
+  --container-max-width: 900px;
+}

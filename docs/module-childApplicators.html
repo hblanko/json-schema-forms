@@ -1,0 +1,2851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: childApplicators</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: childApplicators</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Containers conceived to represent JSON Schema child applicators, as they are
+described by the <a href="https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.3">JSON Schema RFC Draft</a>.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="module-childApplicators-AdditionalItems.html">AdditionalItems</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-childApplicators-AdditionalProperties.html">AdditionalProperties</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-childApplicators-ArrayHandler.html">ArrayHandler</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-childApplicators-ChildrenHandler.html">ChildrenHandler</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-childApplicators-Items.html">Items</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-childApplicators-ObjectHandler.html">ObjectHandler</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-childApplicators-Properties.html">Properties</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+        <h3 class="subsection-title">Interfaces</h3>
+
+        <dl>
+            <dt><a href="module-childApplicators-ChildApplicator.html">ChildApplicator</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~addChildToApplicator"><span class="type-signature">(inner) </span>addChildToApplicator<span class="signature">(index, child, childApplicator)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds a child form element to a child applicator container, updating the
+buttons state.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key identifying the child form element in the child
+applicator container.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>child</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The child form element to add
+to the child applicator container.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>childApplicator</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-childApplicators-ChildApplicator.html">module:childApplicators~ChildApplicator</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The child
+applicator container which the child form element will be added to.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line295">line 295</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Modifies:</h5>
+
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~additionalItemsMinimumChildren"><span class="type-signature">(inner) </span>additionalItemsMinimumChildren<span class="signature">(parent)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the minimum number of children that the module:childApplicators.AdditionalItems container of a given JSON Schema
+form element must have at initialization.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line691">line 691</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The minimum number of children that the container must have
+at initialization.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~additionalPropertiesMinimumChildren"><span class="type-signature">(inner) </span>additionalPropertiesMinimumChildren<span class="signature">(parent)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the minimum number of children that the module:childApplicators.AdditionalProperties container of a given JSON
+Schema form element must have at initialization.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line961">line 961</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The minimum number of children that the container must have
+at initialization.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~createAdditionalItem"><span class="type-signature">(inner) </span>createAdditionalItem<span class="signature">(parent, index, removeCallback)</span><span class="type-signature"> &rarr; {<a href="module-formElement-FormElement.html">module:formElement~FormElement</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates a JSON Schema form element to be added into the <code>additionalItems</code>
+child applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key identifying the child form element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>removeCallback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback function to be called if the
+newly created element is removed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line655">line 655</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The child JSON Schema form element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~createAdditionalProperty"><span class="type-signature">(inner) </span>createAdditionalProperty<span class="signature">(parent, index, removeCallback)</span><span class="type-signature"> &rarr; {<a href="module-formElement-FormElement.html">module:formElement~FormElement</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates a JSON Schema form element to be added into the
+<code>additionalProperties</code> child applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key identifying the child form element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>removeCallback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback function to be called if the
+newly created element is removed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line925">line 925</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The child JSON Schema form element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~createItem"><span class="type-signature">(inner) </span>createItem<span class="signature">(parent, index, removeCallback)</span><span class="type-signature"> &rarr; {<a href="module-formElement-FormElement.html">module:formElement~FormElement</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates a JSON Schema form element to be added into the <code>items</code> child
+applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key identifying the child form element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>removeCallback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The callback function to be called if the
+newly created element is removed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line519">line 519</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The child JSON Schema form element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~createProperty"><span class="type-signature">(inner) </span>createProperty<span class="signature">(schema, propertyKey, parent, index)</span><span class="type-signature"> &rarr; {<a href="module-formElement-FormElement.html">module:formElement~FormElement</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Creates a JSON Schema form element to be added into the <code>properties</code> child
+applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The JSON Schema of the property to be expressed by the
+child form element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>propertyKey</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key of the property to be expressed by the
+child form element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key identifying the child form element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line770">line 770</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The child JSON Schema form element.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~removeChildFromApplicator"><span class="type-signature">(inner) </span>removeChildFromApplicator<span class="signature">(index, childApplicator)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Removes a child form element from a child applicator container, updating the
+buttons state.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key identifying the child form element in the child
+applicator container.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>childApplicator</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-childApplicators-ChildApplicator.html">module:childApplicators~ChildApplicator</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The child
+applicator container which the child form element will be removed from.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line313">line 313</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Modifies:</h5>
+
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~updateAddButtons"><span class="type-signature">(inner) </span>updateAddButtons<span class="signature">(handler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Updates the state of the add buttons associated to the child applicator
+containers of a handler.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-childApplicators-ChildrenHandler.html">module:childApplicators~ChildrenHandler</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The handler whose
+buttons are to be updated.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line239">line 239</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Modifies:</h5>
+
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~updateButtons"><span class="type-signature">(inner) </span>updateButtons<span class="signature">(handler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Updates the state of add and remove buttons associated to child applicator
+containers and form elements of a handler.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-childApplicators-ChildrenHandler.html">module:childApplicators~ChildrenHandler</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The handler whose
+buttons are to be updated.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line225">line 225</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Modifies:</h5>
+
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~updateRemoveButtons"><span class="type-signature">(inner) </span>updateRemoveButtons<span class="signature">(handler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Updates the state of the add buttons associated to the child form elements of
+a handler.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-childApplicators-ChildrenHandler.html">module:childApplicators~ChildrenHandler</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The handler whose
+buttons are to be updated.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line265">line 265</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+<h5>Modifies:</h5>
+
+        
+
+
+
+    
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~yieldNewAdditionalItemState"><span class="type-signature">(inner) </span>yieldNewAdditionalItemState<span class="signature">(parent)</span><span class="type-signature"> &rarr; {<a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the state that should hold a newly created child of a given module:childApplicators.AdditionalItems container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line677">line 677</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object indicating the state
+to be hold by a newly created child.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~yieldNewAdditionalPropertyState"><span class="type-signature">(inner) </span>yieldNewAdditionalPropertyState<span class="signature">(parent)</span><span class="type-signature"> &rarr; {<a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the state that should hold a newly created child of a given module:childApplicators.AdditionalProperties container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line947">line 947</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object indicating the state
+to be hold by a newly created child.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~yieldNewItemState"><span class="type-signature">(inner) </span>yieldNewItemState<span class="signature">(parent)</span><span class="type-signature"> &rarr; {<a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the state that should hold a newly created child of a given module:childApplicators.Items container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">module:jsonSchema.JsonSchema</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line541">line 541</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object indicating the state
+to be hold by a newly created child.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~yieldNewPropertyState"><span class="type-signature">(inner) </span>yieldNewPropertyState<span class="signature">(parent, childElementType)</span><span class="type-signature"> &rarr; {<a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the state that should hold a newly created child of a given module:childApplicators.Properties container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>parent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-formElement-FormElement.html">module:formElement~FormElement</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The parent JSON Schema form
+element.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>childElementType</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The module:formElementDefinitions.ElementType of the newly created child.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line801">line 801</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An object indicating the state
+to be hold by a newly created child.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-formElementDefinitions-State.html">module:formElementDefinitions~State</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-childApplicators.html">childApplicators</a></li><li><a href="module-components.html">components</a></li><li><a href="module-formElement.html">formElement</a></li><li><a href="module-formElementDefinitions.html">formElementDefinitions</a></li><li><a href="module-inPlaceApplicators.html">inPlaceApplicators</a></li><li><a href="module-JsonSchemaForms.html">JsonSchemaForms</a></li><li><a href="module-JsonSchemaKeywords.html">JsonSchemaKeywords</a></li><li><a href="module-JsonSchemaType.html">JsonSchemaType</a></li><li><a href="module-layouts.html">layouts</a></li><li><a href="module-selectors.html">selectors</a></li></ul><h3>Classes</h3><ul><li><a href="module-childApplicators-AdditionalItems.html">AdditionalItems</a></li><li><a href="module-childApplicators-AdditionalProperties.html">AdditionalProperties</a></li><li><a href="module-childApplicators-ArrayHandler.html">ArrayHandler</a></li><li><a href="module-childApplicators-ChildrenHandler.html">ChildrenHandler</a></li><li><a href="module-childApplicators-Items.html">Items</a></li><li><a href="module-childApplicators-ObjectHandler.html">ObjectHandler</a></li><li><a href="module-childApplicators-Properties.html">Properties</a></li><li><a href="module-components-AddButton.html">AddButton</a></li><li><a href="module-components-BooleanInput.html">BooleanInput</a></li><li><a href="module-components-GeneratorIcon.html">GeneratorIcon</a></li><li><a href="module-components-InputTitle.html">InputTitle</a></li><li><a href="module-components-InstanceViewPanel.html">InstanceViewPanel</a></li><li><a href="module-components-LabelTitle.html">LabelTitle</a></li><li><a href="module-components-NumericInput.html">NumericInput</a></li><li><a href="module-components-PillsInstancePanel.html">PillsInstancePanel</a></li><li><a href="module-components-RemoveButton.html">RemoveButton</a></li><li><a href="module-components-RequiredIcon.html">RequiredIcon</a></li><li><a href="module-components-RootIcon.html">RootIcon</a></li><li><a href="module-components-Select.html">Select</a></li><li><a href="module-components-SelectInstancePanel.html">SelectInstancePanel</a></li><li><a href="module-components-TextInput.html">TextInput</a></li><li><a href="module-components-Toggler.html">Toggler</a></li><li><a href="module-formElementDefinitions-State.html">State</a></li><li><a href="module-formElement-FormElement.html">FormElement</a></li><li><a href="module-inPlaceApplicators-Aggregation.html">Aggregation</a></li><li><a href="module-inPlaceApplicators-InPlaceApplicator.html">InPlaceApplicator</a></li><li><a href="module-inPlaceApplicators-IPASchema.html">IPASchema</a></li><li><a href="module-layouts-Layout.html">Layout</a></li><li><a href="module-selectors-Selector.html">Selector</a></li><li><a href="module-selectors-SelectorsContainer.html">SelectorsContainer</a></li><li><a href="module-selectors-SelectorsToolbar.html">SelectorsToolbar</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-childApplicators-ChildApplicator.html">ChildApplicator</a></li><li><a href="module-components-Component.html">Component</a></li><li><a href="module-components-InputComponent.html">InputComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultFormOptions">defaultFormOptions</a></li><li><a href="global.html#formElementByDiv">formElementByDiv</a></li><li><a href="global.html#lcm">lcm</a></li><li><a href="global.html#pointerToId">pointerToId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 26 2020 23:00:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

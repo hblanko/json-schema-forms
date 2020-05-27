@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: inPlaceApplicators</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: inPlaceApplicators</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Module that analyzes and resolves <a href="https://json-schema.org/draft/2019-09/json-schema-core.html#in-place">JSON Schema in-place applicators</a>.</p>
+<p>In this approach, the in-place applicators present in a JSON Schema are
+modeled as a directed tree (where nodes represented by <a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a> objects). Each node stores the keywords
+belonging to its corresponding subschema: hence, any possible materialization
+of a JSON Schema can be reconstructed by aggregating the keywords of each
+node traversed by any directed path from the root node to the leaf.</p>
+<p>The user is intended to select the desired path: <a href="module-selectors.html">module:selectors</a>
+provides a user interface for this purpose.</p></div>
+        
+
+        
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Classes</h3>
+
+        <dl>
+            <dt><a href="module-inPlaceApplicators-Aggregation.html">Aggregation</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-inPlaceApplicators-InPlaceApplicator.html">InPlaceApplicator</a></dt>
+            <dd></dd>
+        
+            <dt><a href="module-inPlaceApplicators-IPASchema.html">IPASchema</a></dt>
+            <dd></dd>
+        </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~aggregate"><span class="type-signature">(inner) </span>aggregate<span class="signature">(schema, &hellip;ipaSchemas)</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Aggregates the keywords of a JSON Schema with the common keywords from a list
+of in-place application nodes.</p>
+<p>Collisions are resolved applying the logic implemented by the
+<a href="module-inPlaceApplicators-Aggregation.html">module:inPlaceApplicators~Aggregation</a> class.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The JSON Schema to aggregate.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ipaSchemas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>The in-place
+application nodes whose common keywords are to be aggregated.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line282">line 282</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The aggregated JSON Schema.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~process"><span class="type-signature">(inner) </span>process<span class="signature">(schema, pointer<span class="signature-attributes">opt</span>, selected<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Processes a JSON Schema, generating an in-place application tree that
+represents its possible materializations.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The JSON Schema to process.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pointer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last"><p>A JSON Pointer that provides unique
+identification to each in-place applicator in the JSON Schema.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>selected</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last"><p>The index indicating the applicator subschema to
+be selected at initialization.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line31">line 31</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The root node to the in-place
+application tree that represents the given JSON Schema.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~processAllOf"><span class="type-signature">(inner) </span>processAllOf<span class="signature">(schema, pointer<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="module-inPlaceApplicators.html#~ProcessAllOfResult">module:inPlaceApplicators~ProcessAllOfResult</a>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Processes an <code>allOf</code> in-place applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>schema</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The JSON Schema including an <code>allOf</code> property to
+process.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pointer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last"><p>A JSON Pointer that identifies the JSON Schema.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line87">line 87</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The result of
+processing the <code>allOf</code> in-place applicator.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="module-inPlaceApplicators.html#~ProcessAllOfResult">module:inPlaceApplicators~ProcessAllOfResult</a></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~processAnyOf"><span class="type-signature">(inner) </span>processAnyOf<span class="signature">(subschemas, pointer<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Processes an <code>anyOf</code> in-place applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>subschemas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The subschemas included in the <code>anyOf</code>
+in-place applicator.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pointer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last"><p>A JSON Pointer that identifies the JSON Schema.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line108">line 108</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of nodes
+representing each subschema contained by the <code>anyOf</code> applicator.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~processDisjunctiveInPlaceApplicator"><span class="type-signature">(inner) </span>processDisjunctiveInPlaceApplicator<span class="signature">(subschemas, pointer<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Processes a disjunctive in-place applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>subschemas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The subschemas included in the disjunctive
+in-place applicator.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pointer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last"><p>A JSON Pointer that identifies the JSON Schema.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line136">line 136</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of nodes
+representing each subschema contained by the applicator.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~processOneOf"><span class="type-signature">(inner) </span>processOneOf<span class="signature">(subschemas, pointer<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>>}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Processes an <code>oneOf</code> in-place applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>subschemas</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;object></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>The subschemas included in the <code>oneOf</code>
+in-place applicator.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>pointer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    ''
+                
+                </td>
+            
+
+            <td class="description last"><p>A JSON Pointer that identifies the JSON Schema.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>An array of nodes
+representing each subschema contained by the <code>oneOf</code> applicator.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array.&lt;<a href="module-inPlaceApplicators-IPASchema.html">module:inPlaceApplicators~IPASchema</a>></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~ProcessAllOfResult">ProcessAllOfResult</h4>
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">object</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>common</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The keywords that are common to all the <code>allOf</code>
+subschemas.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>applicatorByPointer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Map.&lt;string, <a href="module-inPlaceApplicators-InPlaceApplicator.html">module:inPlaceApplicators~InPlaceApplicator</a>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>A map including the child in-place applicators contained by the processed
+<code>allOf</code> applicator.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_inPlaceApplicators.js.html">form/json-schema/inPlaceApplicators.js</a>, <a href="form_json-schema_inPlaceApplicators.js.html#line67">line 67</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-childApplicators.html">childApplicators</a></li><li><a href="module-components.html">components</a></li><li><a href="module-formElement.html">formElement</a></li><li><a href="module-formElementDefinitions.html">formElementDefinitions</a></li><li><a href="module-inPlaceApplicators.html">inPlaceApplicators</a></li><li><a href="module-JsonSchemaForms.html">JsonSchemaForms</a></li><li><a href="module-JsonSchemaKeywords.html">JsonSchemaKeywords</a></li><li><a href="module-JsonSchemaType.html">JsonSchemaType</a></li><li><a href="module-layouts.html">layouts</a></li><li><a href="module-selectors.html">selectors</a></li></ul><h3>Classes</h3><ul><li><a href="module-childApplicators-AdditionalItems.html">AdditionalItems</a></li><li><a href="module-childApplicators-AdditionalProperties.html">AdditionalProperties</a></li><li><a href="module-childApplicators-ArrayHandler.html">ArrayHandler</a></li><li><a href="module-childApplicators-ChildrenHandler.html">ChildrenHandler</a></li><li><a href="module-childApplicators-Items.html">Items</a></li><li><a href="module-childApplicators-ObjectHandler.html">ObjectHandler</a></li><li><a href="module-childApplicators-Properties.html">Properties</a></li><li><a href="module-components-AddButton.html">AddButton</a></li><li><a href="module-components-BooleanInput.html">BooleanInput</a></li><li><a href="module-components-GeneratorIcon.html">GeneratorIcon</a></li><li><a href="module-components-InputTitle.html">InputTitle</a></li><li><a href="module-components-InstanceViewPanel.html">InstanceViewPanel</a></li><li><a href="module-components-LabelTitle.html">LabelTitle</a></li><li><a href="module-components-NumericInput.html">NumericInput</a></li><li><a href="module-components-PillsInstancePanel.html">PillsInstancePanel</a></li><li><a href="module-components-RemoveButton.html">RemoveButton</a></li><li><a href="module-components-RequiredIcon.html">RequiredIcon</a></li><li><a href="module-components-RootIcon.html">RootIcon</a></li><li><a href="module-components-Select.html">Select</a></li><li><a href="module-components-SelectInstancePanel.html">SelectInstancePanel</a></li><li><a href="module-components-TextInput.html">TextInput</a></li><li><a href="module-components-Toggler.html">Toggler</a></li><li><a href="module-formElementDefinitions-State.html">State</a></li><li><a href="module-formElement-FormElement.html">FormElement</a></li><li><a href="module-inPlaceApplicators-Aggregation.html">Aggregation</a></li><li><a href="module-inPlaceApplicators-InPlaceApplicator.html">InPlaceApplicator</a></li><li><a href="module-inPlaceApplicators-IPASchema.html">IPASchema</a></li><li><a href="module-layouts-Layout.html">Layout</a></li><li><a href="module-selectors-Selector.html">Selector</a></li><li><a href="module-selectors-SelectorsContainer.html">SelectorsContainer</a></li><li><a href="module-selectors-SelectorsToolbar.html">SelectorsToolbar</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-childApplicators-ChildApplicator.html">ChildApplicator</a></li><li><a href="module-components-Component.html">Component</a></li><li><a href="module-components-InputComponent.html">InputComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultFormOptions">defaultFormOptions</a></li><li><a href="global.html#formElementByDiv">formElementByDiv</a></li><li><a href="global.html#lcm">lcm</a></li><li><a href="global.html#pointerToId">pointerToId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 26 2020 23:00:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

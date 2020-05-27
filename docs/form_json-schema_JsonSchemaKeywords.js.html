@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: form/json-schema/JsonSchemaKeywords.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: form/json-schema/JsonSchemaKeywords.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Keywords and types specified by the [JSON Schema 2019-09 RFC Draft](https://json-schema.org/draft/2019-09/json-schema-core.html).
+ *
+ * @module JsonSchemaKeywords
+ */
+
+/**
+ * Object containing the JSON Schema keywords classified by its role in the
+ * schema definition.
+ *
+ * @enum {object.&lt;string, string>}
+ */
+const JsonSchemaKeywords = {
+  /**
+   * Keywords representing [JSON Schema annotations](https://json-schema.org/draft/2019-09/json-schema-core.html#annotations).
+   *
+   * @enum {string}
+   */
+  Annotation: {
+    DEFAULT: 'default',
+    DEPRECATED: 'deprecated',
+    DESCRIPTION: 'description',
+    EXAMPLES: 'examples',
+    READ_ONLY: 'readOnly',
+    TITLE: 'title',
+    WRITE_ONLY: 'writeOnly',
+  },
+
+  /**
+   * Keywords representing [JSON Schema applicators for `array` instances](https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.3.1).
+   *
+   * @enum {string}
+   */
+  ArrayApplicator: {
+    ADDITIONAL_ITEMS: 'additionalItems',
+    CONTAINS: 'contains',
+    ITEMS: 'items',
+    UNEVALUATED_ITEMS: 'unevaluatedItems',
+  },
+
+  /**
+   * Keywords representing [JSON Schema validation conditions for `array`
+   * instances](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.4).
+   *
+   * @enum {string}
+   */
+  ArrayValidation: {
+    MAX_CONTAINS: 'maxContains',
+    MAX_ITEMS: 'maxItems',
+    MIN_CONTAINS: 'minContains',
+    MIN_ITEMS: 'minItems',
+    UNIQUE_ITEMS: 'uniqueItems',
+  },
+
+  /**
+   * Keywords representing [JSON Schema in-place applicators with boolean logic](https://json-schema.org/draft/2019-09/json-schema-core.html#logic).
+   *
+   * @enum {string}
+   */
+  BooleanLogicApplicator: {
+    ALL_OF: 'allOf',
+    ANY_OF: 'anyOf',
+    NOT: 'not',
+    ONE_OF: 'oneOf',
+  },
+
+  /**
+   * Keywords representing [JSON Schema in-place applicators conditionally](https://json-schema.org/draft/2019-09/json-schema-core.html#conditional).
+   *
+   * @enum {string}
+   */
+  ConditionalApplicator: {
+    IF: 'if',
+    THEN: 'then',
+    ELSE: 'else',
+  },
+
+  /**
+   * Keywords representing [generic JSON Schema validation conditions](https://json-schema.org/draft/2019-09/json-schema-validation.html#general).
+   *
+   * @enum {string}
+   */
+  GenericValidation: {
+    CONST: 'const',
+    ENUM: 'enum',
+    TYPE: 'type',
+  },
+
+  /**
+   * Keywords representing [JSON Schema validation conditions for numeric
+   * (`number` and `integer`) instances](https://json-schema.org/draft/2019-09/json-schema-validation.html#numeric).
+   *
+   * @enum {string}
+   */
+  NumberValidation: {
+    EXCLUSIVE_MAXIMUM: 'exclusiveMaximum',
+    EXCLUSIVE_MINIMUM: 'exclusiveMinimum',
+    MAXIMUM: 'maximum',
+    MINIMUM: 'minimum',
+    MULTIPLE_OF: 'multipleOf',
+  },
+
+  /**
+   * Keywords representing [JSON Schema applicators for `object` instances](https://json-schema.org/draft/2019-09/json-schema-core.html#rfc.section.9.3.2).
+   *
+   * @enum {string}
+   */
+  ObjectApplicator: {
+    ADDITIONAL_PROPERTIES: 'additionalProperties',
+    PATTERN_PROPERTIES: 'patternProperties',
+    PROPERTIES: 'properties',
+    UNEVALUATED_PROPERTIES: 'unevaluatedProperties',
+  },
+
+  /**
+   * Keywords representing [JSON Schema validation conditions for `object`
+   * instances](https://json-schema.org/draft/2019-09/json-schema-validation.html#rfc.section.6.5).
+   *
+   * @enum {string}
+   */
+  ObjectValidation: {
+    DEPENDENT_REQUIRED: 'dependentRequired',
+    MAX_PROPERTIES: 'maxProperties',
+    MIN_PROPERTIES: 'minProperties',
+    PROPERTY_NAMES: 'propertyNames',
+    REQUIRED: 'required',
+  },
+
+  /**
+   * Keywords representing [JSON Schema validation conditions for `string`
+   * instances](https://json-schema.org/draft/2019-09/json-schema-validation.html#string).
+   *
+   * @enum {string}
+   */
+  StringValidation: {
+    MAX_LENGTH: 'maxLength',
+    MIN_LENGTH: 'minLength',
+    PATTERN: 'pattern',
+  },
+};
+
+export default JsonSchemaKeywords;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-childApplicators.html">childApplicators</a></li><li><a href="module-components.html">components</a></li><li><a href="module-formElement.html">formElement</a></li><li><a href="module-formElementDefinitions.html">formElementDefinitions</a></li><li><a href="module-inPlaceApplicators.html">inPlaceApplicators</a></li><li><a href="module-JsonSchemaForms.html">JsonSchemaForms</a></li><li><a href="module-JsonSchemaKeywords.html">JsonSchemaKeywords</a></li><li><a href="module-JsonSchemaType.html">JsonSchemaType</a></li><li><a href="module-layouts.html">layouts</a></li><li><a href="module-selectors.html">selectors</a></li></ul><h3>Classes</h3><ul><li><a href="module-childApplicators-AdditionalItems.html">AdditionalItems</a></li><li><a href="module-childApplicators-AdditionalProperties.html">AdditionalProperties</a></li><li><a href="module-childApplicators-ArrayHandler.html">ArrayHandler</a></li><li><a href="module-childApplicators-ChildrenHandler.html">ChildrenHandler</a></li><li><a href="module-childApplicators-Items.html">Items</a></li><li><a href="module-childApplicators-ObjectHandler.html">ObjectHandler</a></li><li><a href="module-childApplicators-Properties.html">Properties</a></li><li><a href="module-components-AddButton.html">AddButton</a></li><li><a href="module-components-BooleanInput.html">BooleanInput</a></li><li><a href="module-components-GeneratorIcon.html">GeneratorIcon</a></li><li><a href="module-components-InputTitle.html">InputTitle</a></li><li><a href="module-components-InstanceViewPanel.html">InstanceViewPanel</a></li><li><a href="module-components-LabelTitle.html">LabelTitle</a></li><li><a href="module-components-NumericInput.html">NumericInput</a></li><li><a href="module-components-PillsInstancePanel.html">PillsInstancePanel</a></li><li><a href="module-components-RemoveButton.html">RemoveButton</a></li><li><a href="module-components-RequiredIcon.html">RequiredIcon</a></li><li><a href="module-components-RootIcon.html">RootIcon</a></li><li><a href="module-components-Select.html">Select</a></li><li><a href="module-components-SelectInstancePanel.html">SelectInstancePanel</a></li><li><a href="module-components-TextInput.html">TextInput</a></li><li><a href="module-components-Toggler.html">Toggler</a></li><li><a href="module-formElementDefinitions-State.html">State</a></li><li><a href="module-formElement-FormElement.html">FormElement</a></li><li><a href="module-inPlaceApplicators-Aggregation.html">Aggregation</a></li><li><a href="module-inPlaceApplicators-InPlaceApplicator.html">InPlaceApplicator</a></li><li><a href="module-inPlaceApplicators-IPASchema.html">IPASchema</a></li><li><a href="module-layouts-Layout.html">Layout</a></li><li><a href="module-selectors-Selector.html">Selector</a></li><li><a href="module-selectors-SelectorsContainer.html">SelectorsContainer</a></li><li><a href="module-selectors-SelectorsToolbar.html">SelectorsToolbar</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-childApplicators-ChildApplicator.html">ChildApplicator</a></li><li><a href="module-components-Component.html">Component</a></li><li><a href="module-components-InputComponent.html">InputComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultFormOptions">defaultFormOptions</a></li><li><a href="global.html#formElementByDiv">formElementByDiv</a></li><li><a href="global.html#lcm">lcm</a></li><li><a href="global.html#pointerToId">pointerToId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 26 2020 23:00:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Class: AdditionalItems</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Class: AdditionalItems</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2><span class="attribs"><span class="type-signature"></span></span>
+            <span class="ancestors"><a href="module-childApplicators.html">childApplicators</a>~</span>AdditionalItems<span class="signature">(handler)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description"><p>A container representing the JSON Schema <a href="https://json-schema.org/draft/2019-09/json-schema-core.html#additionalItems"><code>additionalItems</code> child applicator</a>.</p></div>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+    
+    <h2>Constructor</h2>
+    
+
+    
+    <h4 class="name" id="AdditionalItems"><span class="type-signature"></span>new AdditionalItems<span class="signature">(handler)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>handler</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="module-childApplicators-ArrayHandler.html">module:childApplicators~ArrayHandler</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The handler which the
+child applicator container will be added to.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html">module:childApplicators~ChildApplicator</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line553">line 553</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="addButton"><span class="type-signature"></span>addButton<span class="type-signature"> :<a href="module-components-Component.html">module:components~Component</a>|undefined</span></h4>
+
+
+
+
+<div class="description">
+    <p>A button that triggers the addition of new child JSON Schema form elements.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-components-Component.html">module:components~Component</a></span>
+|
+
+<span class="param-type">undefined</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#addButton">module:childApplicators~ChildApplicator#addButton</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line30">line 30</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="childByIndex"><span class="type-signature"></span>childByIndex<span class="type-signature"> :Map.&lt;number, <a href="module-formElement-FormElement.html">module:formElement~FormElement</a>></span></h4>
+
+
+
+
+<div class="description">
+    <p>A map to all contained child JSON Schema objects indexed by an number value.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">Map.&lt;number, <a href="module-formElement-FormElement.html">module:formElement~FormElement</a>></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#childByIndex">module:childApplicators~ChildApplicator#childByIndex</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="childrenDiv"><span class="type-signature"></span>childrenDiv<span class="type-signature"> :HTMLDivElement</span></h4>
+
+
+
+
+<div class="description">
+    <p>Reference to the <code>&lt;div&gt;</code> element containing the form element representation
+of all child JSON Schema objects.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">HTMLDivElement</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#childrenDiv">module:childApplicators~ChildApplicator#childrenDiv</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line54">line 54</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="domElement"><span class="type-signature"></span>domElement<span class="type-signature"> :HTMLDivElement</span></h4>
+
+
+
+
+<div class="description">
+    <p>Reference to the DOM object that contains the HTML structure of the JSON
+Schema child applicator.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">HTMLDivElement</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#domElement">module:childApplicators~ChildApplicator#domElement</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line61">line 61</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="handler"><span class="type-signature"></span>handler<span class="type-signature"> :<a href="module-childApplicators-ChildrenHandler.html">module:childApplicators~ChildrenHandler</a></span></h4>
+
+
+
+
+<div class="description">
+    <p>The handler that includes the child applicator container.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-childApplicators-ChildrenHandler.html">module:childApplicators~ChildrenHandler</a></span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#handler">module:childApplicators~ChildApplicator#handler</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="title"><span class="type-signature"></span>title<span class="type-signature"> :<a href="module-components-Component.html">module:components~Component</a>|undefined</span></h4>
+
+
+
+
+<div class="description">
+    <p>The title of the child applicator container.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-components-Component.html">module:components~Component</a></span>
+|
+
+<span class="param-type">undefined</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#title">module:childApplicators~ChildApplicator#title</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line36">line 36</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+            
+<h4 class="name" id="titleIcon"><span class="type-signature"></span>titleIcon<span class="type-signature"> :<a href="module-components-Component.html">module:components~Component</a>|undefined</span></h4>
+
+
+
+
+<div class="description">
+    <p>The title icon of the child applicator container.</p>
+</div>
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type"><a href="module-components-Component.html">module:components~Component</a></span>
+|
+
+<span class="param-type">undefined</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#titleIcon">module:childApplicators~ChildApplicator#titleIcon</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="addChild"><span class="type-signature"></span>addChild<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Adds a new child JSON Schema form element to the container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#addChild">module:childApplicators~ChildApplicator#addChild</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line68">line 68</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="disable"><span class="type-signature"></span>disable<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Disables the child applicator container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#disable">module:childApplicators~ChildApplicator#disable</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line76">line 76</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="enable"><span class="type-signature"></span>enable<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Enables the child applicator container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#enable">module:childApplicators~ChildApplicator#enable</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line84">line 84</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="getChildInstance"><span class="type-signature"></span>getChildInstance<span class="signature">()</span><span class="type-signature"> &rarr; {object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Returns the part of the JSON instance that corresponds to the given JSON
+Schema child applicator.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#getChildInstance">module:childApplicators~ChildApplicator#getChildInstance</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line92">line 92</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The portion related to the given child applicator of the
+complete JSON Schema instance.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="removeChild"><span class="type-signature"></span>removeChild<span class="signature">(index)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Removes a child JSON Schema form element from the container.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The key mapping to the child form element to be
+removed.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="implements">Implements:</dt>
+    <dd class="implements"><ul>
+        
+            <li><a href="module-childApplicators-ChildApplicator.html#removeChild">module:childApplicators~ChildApplicator#removeChild</a></li>
+        
+    </ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="form_json-schema_childApplicators.js.html">form/json-schema/childApplicators.js</a>, <a href="form_json-schema_childApplicators.js.html#line104">line 104</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-childApplicators.html">childApplicators</a></li><li><a href="module-components.html">components</a></li><li><a href="module-formElement.html">formElement</a></li><li><a href="module-formElementDefinitions.html">formElementDefinitions</a></li><li><a href="module-inPlaceApplicators.html">inPlaceApplicators</a></li><li><a href="module-JsonSchemaForms.html">JsonSchemaForms</a></li><li><a href="module-JsonSchemaKeywords.html">JsonSchemaKeywords</a></li><li><a href="module-JsonSchemaType.html">JsonSchemaType</a></li><li><a href="module-layouts.html">layouts</a></li><li><a href="module-selectors.html">selectors</a></li></ul><h3>Classes</h3><ul><li><a href="module-childApplicators-AdditionalItems.html">AdditionalItems</a></li><li><a href="module-childApplicators-AdditionalProperties.html">AdditionalProperties</a></li><li><a href="module-childApplicators-ArrayHandler.html">ArrayHandler</a></li><li><a href="module-childApplicators-ChildrenHandler.html">ChildrenHandler</a></li><li><a href="module-childApplicators-Items.html">Items</a></li><li><a href="module-childApplicators-ObjectHandler.html">ObjectHandler</a></li><li><a href="module-childApplicators-Properties.html">Properties</a></li><li><a href="module-components-AddButton.html">AddButton</a></li><li><a href="module-components-BooleanInput.html">BooleanInput</a></li><li><a href="module-components-GeneratorIcon.html">GeneratorIcon</a></li><li><a href="module-components-InputTitle.html">InputTitle</a></li><li><a href="module-components-InstanceViewPanel.html">InstanceViewPanel</a></li><li><a href="module-components-LabelTitle.html">LabelTitle</a></li><li><a href="module-components-NumericInput.html">NumericInput</a></li><li><a href="module-components-PillsInstancePanel.html">PillsInstancePanel</a></li><li><a href="module-components-RemoveButton.html">RemoveButton</a></li><li><a href="module-components-RequiredIcon.html">RequiredIcon</a></li><li><a href="module-components-RootIcon.html">RootIcon</a></li><li><a href="module-components-Select.html">Select</a></li><li><a href="module-components-SelectInstancePanel.html">SelectInstancePanel</a></li><li><a href="module-components-TextInput.html">TextInput</a></li><li><a href="module-components-Toggler.html">Toggler</a></li><li><a href="module-formElementDefinitions-State.html">State</a></li><li><a href="module-formElement-FormElement.html">FormElement</a></li><li><a href="module-inPlaceApplicators-Aggregation.html">Aggregation</a></li><li><a href="module-inPlaceApplicators-InPlaceApplicator.html">InPlaceApplicator</a></li><li><a href="module-inPlaceApplicators-IPASchema.html">IPASchema</a></li><li><a href="module-layouts-Layout.html">Layout</a></li><li><a href="module-selectors-Selector.html">Selector</a></li><li><a href="module-selectors-SelectorsContainer.html">SelectorsContainer</a></li><li><a href="module-selectors-SelectorsToolbar.html">SelectorsToolbar</a></li></ul><h3>Interfaces</h3><ul><li><a href="module-childApplicators-ChildApplicator.html">ChildApplicator</a></li><li><a href="module-components-Component.html">Component</a></li><li><a href="module-components-InputComponent.html">InputComponent</a></li></ul><h3>Global</h3><ul><li><a href="global.html#defaultFormOptions">defaultFormOptions</a></li><li><a href="global.html#formElementByDiv">formElementByDiv</a></li><li><a href="global.html#lcm">lcm</a></li><li><a href="global.html#pointerToId">pointerToId</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 26 2020 23:00:52 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

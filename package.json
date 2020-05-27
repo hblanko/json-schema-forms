@@ -1,17 +1,67 @@
 {
   "name": "json-schema-forms",
-  "version": "0.1.0",
-  "main": "index.js",
+  "version": "0.2.0-alpha.2",
+  "description": "A pure JavaScript tool that generates HTML forms from JSON Schemas.",
   "license": "GPL-3.0-or-later",
+  "keywords": [
+    "json",
+    "schema",
+    "form",
+    "html-form",
+    "jsonschema",
+    "json-schema",
+    "json-schema-form",
+    "bootstrap"
+  ],
+  "author": {
+    "name": "Hernán Blanco",
+    "email": "hblanco@pm.me",
+    "url": "https://github.com/hblanko"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hblanko/json-schema-forms.git"
+  },
+  "main": "src/index.js",
+  "files": [
+    "dist/json-schema-forms.min.js",
+    "css/json-schema-forms.css",
+    "src/**/*"
+  ],
   "scripts": {
-    "setup": "yarn add parcel-bundler --dev",
-    "dev": "parcel index.html",
-    "build": "parcel build index.html --out-dir build --public-url /cookbase/forms --no-source-maps"
+    "build": "parcel build ./src/index.js --out-dir dist --no-source-maps -o json-schema-forms.min.js",
+    "dev": "parcel ./tests/example-dev.html --out-dir serve",
+    "doc": "jsdoc -c ./.jsdoc.json",
+    "lint": "eslint ./src --ext .js",
+    "prettify": "prettier-eslint --eslint-config-path ./.eslintrc.js --write \"$PWD/src/**/*.js\" \"$PWD/README.md\" \"$PWD/.prettierrc\" \"$PWD/package.json\"",
+    "prettify:tests": "prettier-eslint --eslint-config-path ./.eslintrc.js --write \"$PWD/tests/**/*{.js,.html}\"",
+    "setup-bundler": "yarn add parcel-bundler --dev"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": "prettier-eslint --eslint-config-path ./.eslintrc.js --write",
+    "README.md": "prettier-eslint --eslint-config-path ./.eslintrc.js --write",
+    "package.json": "prettier-eslint --eslint-config-path ./.eslintrc.js --write"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "babel": "^6.23.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.1.0",
+    "eslint-plugin-jsdoc": "^25.4.2",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.6",
+    "parcel-bundler": "^1.12.4",
+    "prettier": "^2.0.5",
+    "prettier-eslint": "^10.1.1",
+    "prettier-eslint-cli": "^5.0.0"
   },
   "dependencies": {
-    "@apidevtools/json-schema-ref-parser": "^8.0.0"
+    "@apidevtools/json-schema-ref-parser": "^9.0.1",
+    "es": "^0.7.3",
+    "jquery": "^3.5.1"
   }
 }
