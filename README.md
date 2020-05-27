@@ -2,9 +2,11 @@
 
 A JavaScript tool that generates HTML forms from JSON Schemas.
 
-This implementation accepts schemas following the [JSON Schema Draft 2019-09 specification](https://json-schema.org/), and provides [Bootstrap](https://getbootstrap.com/) (4.5+) and [Font Awesome](https://fontawesome.com/) (5.13+) to organize and decorate the layout. While these libraries are not required, they are highly recommended to get the form properly rendered by the browser.
+This implementation accepts schemas following the [JSON Schema Draft 2019-09 specification](https://json-schema.org/), with the goal of providing a straightforward mean to express potentially large and complex JSON Schemas in an intuitive fashion.
 
-JsonSchemaForms makes use of the [JSON Schema \$Ref Parser](https://github.com/APIDevTools/json-schema-ref-parser) in order to resolve and dereference the schemas to be processed.
+JsonSchemaForms comes with [Bootstrap](https://getbootstrap.com/) (4.5+) and [Font Awesome](https://fontawesome.com/) (5.13+) support in order to organize and decorate the layout. While these libraries are not required, they are highly recommended to get the form properly rendered by the browser.
+
+JsonSchemaForms makes use of the [JSON Schema \$Ref Parser](https://github.com/APIDevTools/json-schema-ref-parser) to resolve and dereference the schemas to be processed.
 
 ## Usage
 
@@ -58,7 +60,7 @@ Hence, the full picture of a barebone `example.html` using JsonSchemaForms CDN e
 </html>
 ```
 
-Now, let us define our basic `example.js` script.
+A basic script `example.js` may look like this:
 
 ```javascript
 // You've got two options in order to plug your JSON Schema:
