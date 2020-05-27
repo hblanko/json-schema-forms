@@ -12,5 +12,10 @@
   "recurseDepth": 3,
   "plugins": [
     "plugins/markdown"
-  ]
+  ],
+  "templates": {
+    "default": {
+      "includeDate": false
+    }
+  }
 }
