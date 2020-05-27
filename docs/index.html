@@ -45,31 +45,100 @@
     <section>
         <article><h1>JsonSchemaForms</h1>
 <p>A JavaScript tool that generates HTML forms from JSON Schemas.</p>
-<p>This implementation accepts schemas following the <a href="https://json-schema.org/">JSON Schema Draft 2019-09 specification</a>, and provides <a href="https://getbootstrap.com/">Bootstrap</a> support (4.5+) to organize and decorate the layout.</p>
-<p><code>json-schema-forms</code> makes use of the <a href="https://github.com/APIDevTools/json-schema-ref-parser">JSON Schema $Ref Parser</a> in order to resolve and dereference the JSON Schema to process.</p>
+<p>This implementation accepts schemas following the <a href="https://json-schema.org/">JSON Schema Draft 2019-09 specification</a>, and provides <a href="https://getbootstrap.com/">Bootstrap</a> (4.5+) and <a href="https://fontawesome.com/">Font Awesome</a> (5.13+) to organize and decorate the layout. While these libraries are not required, they are highly recommended to get the form properly rendered by the browser.</p>
+<p>JsonSchemaForms makes use of the <a href="https://github.com/APIDevTools/json-schema-ref-parser">JSON Schema $Ref Parser</a> in order to resolve and dereference the schemas to be processed.</p>
 <h2>Usage</h2>
-<p><a href="https://yarnpkg.com/">Yarn</a> is required in order to generate a bundled version of the script (using <a href="https://parceljs.org/">Parcel</a>).</p>
-<p>Simply download and install both the <code>json-schema-forms</code> and the required packages with the following commands:</p>
-<pre class="prettyprint source lang-console"><code>$ git clone https://github.com/hblanko/json-schema-forms.git
-$ yarn setup
+<p>The JsonSchemaForms module provides a <code>build()</code> function that performs the whole process of analyzing a JSON Schema and generating the DOM and internal representation of the form. Have a look at the <a href="docs/module-JsonSchemaForms.html"><code>JsonSchemaForms.build()</code> API</a> for usage details.</p>
+<h3>Through CDN</h3>
+<p>The quickly and easy way to make JsonSchemaForms available to your scripts, by adding a few CDN links to your HTML code.</p>
+<p>JsonSchemaForms provides a script and style sheet that can be linked adding the following tags:</p>
+<pre class="prettyprint source lang-html"><code>&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/npm/json-schema-forms@latest/css/json-schema-forms.min.css&quot; />
 </code></pre>
-<p>The <code>package.json</code> document comes prepared with two scripts:</p>
-<ul>
-<li><code>dev</code>: Runs on development mode, initializing a live server that refreshes automatically on script changes.</li>
-<li><code>build</code>: Generates the bundled script together with the other output files.</li>
-</ul>
-<p>The options for each of these scripts can be adapted to your needs inside the <code>package.json</code> document.</p>
-<p>Given so, you can change the <code>index.js</code> script to suit your needs and just run the following to produce the expected output:</p>
-<pre class="prettyprint source lang-console"><code>$ yarn &lt;dev|build>
+<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://cdn.jsdelivr.net/npm/json-schema-forms@latest/dist/json-schema-forms.min.js&quot;>&lt;/script>
 </code></pre>
-<h2>Forthcoming</h2>
+<p>On top of that, as mentioned before, Bootstrap and Font Awesome allow for a nice-looking result, so their CDN links are recommended to be included, too.</p>
+<p>Hence, the full picture of a barebone <code>example.html</code> using JsonSchemaForms CDN ends up looking like this:</p>
+<pre class="prettyprint source lang-html"><code>&lt;!DOCTYPE html>
+&lt;html lang=&quot;en&quot;>
+  &lt;head>
+    &lt;meta charset=&quot;utf-8&quot; />
+    &lt;!-- Bootstrap-related style -->
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, shrink-to-fit=no&quot; />
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css&quot; integrity=&quot;sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk&quot; crossorigin=&quot;anonymous&quot; />
+    &lt;!-- JsonSchemaForms style sheet -->
+    &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/npm/json-schema-forms@latest/css/json-schema-forms.min.css&quot; />
+  &lt;/head>
+
+  &lt;body>
+    &lt;!-- Bootstrap and Font Awesome scripts -->
+    &lt;script src=&quot;https://code.jquery.com/jquery-3.5.1.slim.min.js&quot; integrity=&quot;sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj&quot; crossorigin=&quot;anonymous&quot;>&lt;/script>
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js&quot; integrity=&quot;sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo&quot; crossorigin=&quot;anonymous&quot;>&lt;/script>
+    &lt;script src=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js&quot; integrity=&quot;sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI&quot; crossorigin=&quot;anonymous&quot;>&lt;/script>
+    &lt;script src=&quot;https://kit.fontawesome.com/64968f57be.js&quot; crossorigin=&quot;anonymous&quot;>&lt;/script>
+    &lt;!-- JsonSchemaForms script -->
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/json-schema-forms@latest/dist/json-schema-forms.min.js&quot;>&lt;/script>
+    &lt;!-- Your script -->
+    &lt;script src=&quot;./example.js&quot;>&lt;/script>
+
+    &lt;!-- Some containers to use by your script -->
+    &lt;div id=&quot;form-container&quot;>&lt;/div>
+    &lt;pre id=&quot;json-result&quot;>&lt;/pre>
+  &lt;/body>
+&lt;/html>
+</code></pre>
+<p>Now, let us define our basic <code>example.js</code> script.</p>
+<pre class="prettyprint source lang-javascript"><code>// You've got two options in order to plug your JSON Schema:
+//   1. Provide a URL to a JSON Schema.
+//   2. Directly assign an object following the JSON Schema format.
+
+// const schema = 'http://landarltracker.com/schemas/test.json';
+const schema = {
+  title: 'The Root Form Element',
+  description: 'Easy, right?',
+  type: 'string',
+};
+
+// Also, you can define the form behavior on submission, e.g.:
+const submitCallback = (rootFormElement) => {
+  // Show the resulting JSON instance in your page.
+  document.getElementById('json-result').innerText = JSON.stringify(
+    rootFormElement.getInstance(),
+    null,
+    2
+  );
+  // (For testing purposes, return false to prevent automatic redirect.)
+  return false;
+};
+
+// Finally, get your form...
+const jsonSchemaForm = JsonSchemaForms.build(schema, submitCallback);
+
+// ... and attach it somewhere to your page.
+window.addEventListener('load', () => {
+  document.getElementById('form-container').appendChild(jsonSchemaForm);
+});
+</code></pre>
+<p>This example works directly out of the box. Feel free to copy, paste, and play around with it!</p>
+<h3>Custom bundle</h3>
+<p>If you prefer to import it into your own project, use your favorite package manager to install it:</p>
+<pre class="prettyprint source lang-console"><code>yarn add json-schema-forms
+</code></pre>
+<p>or</p>
+<pre class="prettyprint source lang-console"><code>npm i json-schema-forms
+</code></pre>
+<p>And just make it available by including at the top of your script:</p>
+<pre class="prettyprint source lang-javascript"><code>import JsonSchemaForms from 'json-schema-forms';
+</code></pre>
+<p>Then, you can use it as shown in <code>example.js</code> through the <code>build()</code> function
+(check <a href="docs/module-JsonSchemaForms.html">the API docs</a> for detailed information).</p>
+<h2>What's to come?</h2>
 <p>Base code is still under work, being several features not yet covered (but expected to be):</p>
 <ul>
-<li>The 'allOf' keyword</li>
-<li>A number of features from JSON Schema types, e.g. the 'contains' directive from the 'object' type</li>
-<li>General bugfixing</li>
+<li>Conditional in-place applicators.</li>
+<li>Some child applicators (e.g. <code>patternProperties</code>) and validation keywords.</li>
+<li>Aggregation logic yet to be implemented for several keywords.</li>
 </ul>
-<p>This script was initially conceived to be used in the framework of <a href="https://github.com/hblanko/cookbase">the Cookbase Project</a>.</p></article>
+<p><em>JsonSchemaForms was initially conceived as a basis for a specialized version to be used in the framework of <a href="https://github.com/hblanko/cookbase">the Cookbase Project</a>.</em></p></article>
     </section>
 
 
@@ -86,7 +155,7 @@ $ yarn setup
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Tue May 26 2020 23:00:52 GMT+0200 (Central European Summer Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.4</a> on Wed May 27 2020 15:15:14 GMT+0200 (Central European Summer Time)
 </footer>
 
 <script> prettyPrint(); </script>
