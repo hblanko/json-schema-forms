@@ -8,7 +8,7 @@ JsonSchemaForms makes use of the [JSON Schema \$Ref Parser](https://github.com/A
 
 ## Usage
 
-The JsonSchemaForms module provides a `build()` function that performs the whole process of analyzing a JSON Schema and generating the DOM and internal representation of the form. Have a look at the [`JsonSchemaForms.build()` API](docs/module-JsonSchemaForms.html) for usage details.
+The JsonSchemaForms module provides a `build()` function that performs the whole process of analyzing a JSON Schema and generating the DOM and internal representation of the form. Have a look at the [`JsonSchemaForms.build()` API](https://hblanko.github.io/json-schema-forms/module-JsonSchemaForms.html) for usage details.
 
 ### Through CDN
 
@@ -116,7 +116,7 @@ import JsonSchemaForms from 'json-schema-forms';
 ```
 
 Then, you can use it as shown in `example.js` through the `build()` function
-(check [the API docs](docs/module-JsonSchemaForms.html) for detailed information).
+(check [the API docs](https://hblanko.github.io/json-schema-forms/module-JsonSchemaForms.html) for detailed information).
 
 ## What's to come?
 
