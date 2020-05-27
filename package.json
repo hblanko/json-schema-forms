@@ -33,7 +33,7 @@
     "dev": "parcel ./tests/example-dev.html --out-dir serve",
     "doc": "jsdoc -c ./.jsdoc.json",
     "lint": "eslint ./src --ext .js",
-    "prettify": "prettier-eslint --eslint-config-path ./.eslintrc.js --write \"$PWD/src/**/*.js\" \"$PWD/README.md\" \"$PWD/.prettierrc\" \"$PWD/package.json\"",
+    "prettify": "prettier-eslint --eslint-config-path ./.eslintrc.js --write \"$PWD/src/**/*.js\" \"$PWD/package.json\"",
     "prettify:tests": "prettier-eslint --eslint-config-path ./.eslintrc.js --write \"$PWD/tests/**/*{.js,.html}\"",
     "setup-bundler": "yarn add parcel-bundler --dev"
   },
@@ -44,7 +44,6 @@
   },
   "lint-staged": {
     "src/**/*.js": "prettier-eslint --eslint-config-path ./.eslintrc.js --write",
-    "README.md": "prettier-eslint --eslint-config-path ./.eslintrc.js --write",
     "package.json": "prettier-eslint --eslint-config-path ./.eslintrc.js --write"
   },
   "devDependencies": {
